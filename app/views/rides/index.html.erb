@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="title-card">
+    <div class="title">
+      <h2>Available rides to:</h2>
+      <h1>Schiphol Airport</h1>
+    </div>
+    <%= image_tag("car.png", alt:"car", class: "title-img")%>
+  </div>
+  <% @rides.each do |ride|%>
+    <div>
+      <h3><%= ride.origin %></h3>
+      <h3>To</h3>
+      <h3><%= ride.destination %></h3>
+      <%= cl_image_tag ride.driver.user.photo.key, height: 300, width: 400, crop: :fill %>
+      <div>
+        <p>available on:</p>
+        <p><%= ride.start_time.strftime('%H:%M') %></p>
+      </div>
+    </div>
+  <%end %>
+</div>
