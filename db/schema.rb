@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_094206) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_124343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,13 +48,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_094206) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "seats"
     t.index ["ride_id"], name: "index_bookings_on_ride_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "drivers", force: :cascade do |t|
     t.string "dl_number"
-    t.string "car_number_plate"
+    t.string "car_plate"
     t.string "car_model"
     t.string "car_color"
     t.bigint "user_id", null: false
@@ -90,8 +91,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_094206) do
     t.bigint "driver_id", null: false
     t.integer "seats"
     t.date "date"
-    t.datetime "departure_time"
-    t.string "departure_location"
+    t.datetime "start_time"
+    t.string "origin"
     t.string "destination"
     t.text "remarks"
     t.string "price_per_km"
