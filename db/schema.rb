@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_124343) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_133537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,6 +98,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_124343) do
     t.string "price_per_km"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "origin_latitude"
+    t.float "origin_longitude"
+    t.float "destination_latitude"
+    t.float "destination_longitude"
     t.index ["driver_id"], name: "index_rides_on_driver_id"
   end
 
