@@ -10,8 +10,90 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_03_153243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "ride_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_bookings_on_ride_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "drivers", force: :cascade do |t|
+    t.string "dl_number"
+    t.string "car_number_plate"
+    t.string "car_model"
+    t.string "car_color"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_drivers_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comments"
+    t.integer "rating"
+    t.bigint "ride_id", null: false
+    t.bigint "reviewer_id", null: false
+    t.bigint "receiver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_reviews_on_receiver_id"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
+    t.index ["ride_id"], name: "index_reviews_on_ride_id"
+  end
+
+  create_table "rides", force: :cascade do |t|
+    t.bigint "driver_id", null: false
+    t.integer "seats"
+    t.date "date"
+    t.datetime "departure_time"
+    t.string "departure_location"
+    t.string "destination"
+    t.text "remarks"
+    t.string "price_per_km"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_rides_on_driver_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "bookings", "rides"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "drivers", "users"
+  add_foreign_key "messages", "bookings"
+  add_foreign_key "messages", "users"
+  add_foreign_key "reviews", "rides"
+  add_foreign_key "reviews", "users", column: "receiver_id"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
+  add_foreign_key "rides", "drivers"
 end
