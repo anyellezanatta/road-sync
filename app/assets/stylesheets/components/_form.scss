@@ -1,0 +1,17 @@
+.form-control {
+  flex-direction: column;
+  border-radius: 5px;
+  text-align: left;
+
+  .input {
+    border: 1px solid #ccc; // Light grey border
+    background-color: $light-gray; // Very light background color
+    border-radius: 5px;
+    color: #333; // Text color
+  }
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px $medium-blue;
+}
