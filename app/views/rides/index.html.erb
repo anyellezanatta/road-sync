@@ -1,22 +1,27 @@
 <div class="container">
   <div class="title-card">
     <div class="title">
+      <%= link_to image_tag("arrow-left.svg", alt:"back"), root_path%>
       <h2>Available rides to:</h2>
       <h1>Schiphol Airport</h1>
     </div>
     <%= image_tag("car.png", alt:"car", class: "title-img")%>
   </div>
   <% @rides.each do |ride|%>
-    <div>
-      <div>
-        <h3><%= ride.origin %></h3>
-        <h3>To</h3>
-        <h3><%= ride.destination %></h3>
+    <div class="card-ride">
+      <div class="card-info">
+        <div class="card-route">
+          <h2><%= ride.origin %></h2>
+          <p>to</p>
+          <h2><%= ride.destination %></h2>
+        </div>
+        <div class="avatar-card">
+          <%= cl_image_tag ride.driver.user.photo.key, crop: :fill, class:"avatar-bordered" %>
+          <p class="avatar-name"><%= ride.driver.user.first_name %></p>
+        </div>
       </div>
-      <%= cl_image_tag ride.driver.user.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-bordered" %>
-      <div>
+      <div class="card-available">
         <p>available on:</p>
-        <p><%= ride.date %></p>
         <p><%= ride.start_time.strftime('%H:%M') %></p>
       </div>
     </div>
