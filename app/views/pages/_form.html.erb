@@ -1,7 +1,7 @@
 <%= simple_form_for :search, url: rides_path, method: :get, html: { class: "form-control d-flex" } do |f| %>
   <%= f.input :origin, input_html: { class: "input", placeholder: "Where are you starting from?" }, value: params[:origin], label: false %>
   <%= f.input :destination, input_html: { class: "input", placeholder: "Where are you going?" }, value: params[:destination], label: false %>
-  <%= f.input :date, input_html: { class: "input", placeholder: "When are you going?" }, value: params[:date], label: false %>
-  <%= f.input :seats, input_html: { class: "input", placeholder: "How many passengers?" }, value: params[:passengers], label: false %>
+  <%= f.input :date, input_html: { class: "input", placeholder: "When are you going?", data: { controller: "datepicker" } }, value: params[:date], label: false %>
+  <%= f.input :seats, input_html: { class: "input", placeholder: "How many passengers?"}, value: params[:passengers], label: false %>
   <%= f.button :submit, "Find a ride", class: "btn" %>
 <% end %>
