@@ -20,12 +20,12 @@ class Ride < ApplicationRecord
       end
     end
 
-    return unless destination_changed?
-
-    geocoded = Geocoder.search(destination).first
-    return unless geocoded
-
-    self.destination_latitude = geocoded.latitude
-    self.destination_longitude = geocoded.longitude
+    if destination_changed?
+      geocoded = Geocoder.search(destination).first
+      if geocoded
+        self.destination_latitude = geocoded.latitude
+        self.destination_longitude = geocoded.longitude
+      end
+    end
   end
 end
