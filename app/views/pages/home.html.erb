@@ -1,2 +1,11 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+<div >
+  <%= form_with url: rides_path, class:"form-control", method: :get do %>
+    <%= text_field_tag :origin, params[:origin], class: "input", placeholder: "Where are you starting from?" %>
+    <%= text_field_tag :destination, params[:destination], class: "input", placeholder: "Where are you going?" %>
+    <%= text_field_tag :date, params[:date], class: "input", placeholder: "When are you going?" %>
+    <%= text_field_tag :seats, params[:passengers], class: "input", placeholder: "How many passengers?" %>
+    <%= submit_tag "Find a ride", class: "btn"%>
+  <% end %>
+</div>

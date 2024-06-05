@@ -8,12 +8,15 @@
   </div>
   <% @rides.each do |ride|%>
     <div>
-      <h3><%= ride.origin %></h3>
-      <h3>To</h3>
-      <h3><%= ride.destination %></h3>
-      <%= cl_image_tag ride.driver.user.photo.key, height: 300, width: 400, crop: :fill %>
+      <div>
+        <h3><%= ride.origin %></h3>
+        <h3>To</h3>
+        <h3><%= ride.destination %></h3>
+      </div>
+      <%= cl_image_tag ride.driver.user.photo.key, height: 300, width: 400, crop: :fill, class:"avatar-bordered" %>
       <div>
         <p>available on:</p>
+        <p><%= ride.date %></p>
         <p><%= ride.start_time.strftime('%H:%M') %></p>
       </div>
     </div>
