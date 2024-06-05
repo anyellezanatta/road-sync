@@ -4,8 +4,28 @@ class Ride < ApplicationRecord
   has_many :bookings
 
   geocoded_by :origin, latitude: :origin_latitude, longitude: :origin_longitude
-  after_validation :geocode, if: :will_save_change_to_origin?
-
   geocoded_by :destination, latitude: :destination_latitude, longitude: :destination_longitude
-  after_validation :geocode, if: :will_save_change_to_destination?
+
+  # after_validation :geocode, if: :origin_destination_changed?
+  before_save :geocode_endpoints
+
+  private
+
+  def geocode_endpoints
+    if origin_changed?
+      geocoded = Geocoder.search(origin).first
+      if geocoded
+        self.origin_latitude = geocoded.latitude
+        self.origin_longitude = geocoded.longitude
+      end
+    end
+
+    return unless destination_changed?
+
+    geocoded = Geocoder.search(destination).first
+    return unless geocoded
+
+    self.destination_latitude = geocoded.latitude
+    self.destination_longitude = geocoded.longitude
+  end
 end
