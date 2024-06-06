@@ -1,7 +1,10 @@
 class RidesController < ApplicationController
   def index
     @rides = Ride.all
+
     search = params[:search]
+    return unless params[:search].present?
+    return unless search[:origin].present? || search[:destination].present? || search[:date].present?
 
     origin = search[:origin].downcase
     destination = search[:destination].downcase
