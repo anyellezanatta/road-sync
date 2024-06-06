@@ -3,24 +3,47 @@
   background-color: $light-gray;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+
+
+  // .show-text {
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
 
   h1 {
     color: $medium-blue;
     margin-left: 5px;
   }
 
-  .destination {
-    margin-top: 60px;
-    margin-bottom: 0px;
-    text-align: end;
-  }
-
-  img, svg {
-    align-self: first baseline;
-  }
 }
 
-.location {
-  display:flex;
-  // flex-direction: ;
+// .location {
+//   // display: flex;
+//   // height: 600px;
+//   // align-content: space-between;
+//   // margin-right: 40px;
+//   // gap: 200px;
+// }
+
+.price-time {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.text {
+  gap: 80px;
+}
+
+.show-info-icon {
+  display: flex;
+  // align-content: space-between
+}
+
+.destination {
+  margin-top: 73px;
 }
