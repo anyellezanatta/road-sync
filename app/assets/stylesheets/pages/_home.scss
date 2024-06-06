@@ -1,1 +1,21 @@
-// Specific CSS for your home-page
+
+.btn {
+  color: $light-gray;
+  background-color: $medium-blue;
+}
+
+.home-container {
+  text-align: center;
+
+  img {
+    width: 100%;
+  }
+
+  h2 {
+    margin-top: 20px;
+  }
+}
+
+#home-img {
+  width: 390px;
+}

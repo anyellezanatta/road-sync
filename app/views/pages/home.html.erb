@@ -1,2 +1,28 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <h1><strong>Find a ride to your destination</strong></h1>
+  <p>Enter your journey details, hop in & go!</p>
+  <%= render 'form' %>
+</div>
+<%= image_tag "home.jpg", id: "home-img", alt: "Two people traveling together in a car" %>
+<div class="container benefits home-container">
+  <h2><em>"Wherever you go, Sync you flow..."</em></h2>
+  <h1>Why RoadSync?</h1>
+  <div class="benefits-card">
+    <h2><strong>Saving costs</strong></h2>
+    <%= image_tag "save_money.png", alt: "Two people traveling together in a car" %>
+    <h5>Lower Transportation Costs</h5>
+    <h5>Reduced Fuel Expenses</h5>
+  </div>
+  <div class="benefits-card">
+    <h2><strong>Environmental Benefits</strong></h2>
+    <%= image_tag "environment.png", alt: "Two people traveling together in a car" %>
+    <h5>Reduced Carbon Footprint</h5>
+    <h5>Decreased Traffic Congestion</h5>
+  </div>
+  <div class="benefits-card">
+    <h2><strong>Social Benefits</strong></h2>
+    <%= image_tag "social.png", alt: "Two people traveling together in a car" %>
+    <h5>Getting in touch with new people</h5>
+    <h5>Enhanced Safety with a shared ride </h5>
+  </div>
+</div>

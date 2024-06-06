@@ -24,7 +24,7 @@
         <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
       </div>
       <div class="">
-        <%= link_to 'Cancel', '#', class: 'btn btn-primary'  %>
+        <%= link_to 'Cancel', cancel_booking_path(booking), class: 'btn btn-primary', data: { "turbo-method": :patch }  %>
       </div>
     </div>
   <% end %>
