@@ -56,13 +56,13 @@ driverMatilda.photo.attach(io: fileMatilda, filename: "#{driverMatilda.car_model
 
 puts "Creating rides..."
 
-ride1 = Ride.create!(origin: "Amsterdam", destination: "Sassenheim", date: Date.new(2024, 6, 1), start_time: "12:00",
+ride1 = Ride.create!(origin: "Amsterdam", destination: "Sassenheim", date: Date.new(2024, 6, 15), start_time: "12:00",
                      remarks: "No smoking allowed", price_per_km: 0.5, seats: 3, driver: driverAnyelle)
-ride2 = Ride.create!(origin: "Arnhem", destination: "Amsterdam", date: Date.new(2024, 5, 29), start_time: "14:00",
+ride2 = Ride.create!(origin: "Arnhem", destination: "Amsterdam", date: Date.new(2024, 6, 29), start_time: "14:00",
                      remarks: "No pets allowed", price_per_km: 0.6, seats: 2, driver: driverParikaya)
-ride3 = Ride.create!(origin: "Rotterdam", destination: "Delft", date: Date.new(2024, 6, 3), start_time: "10:00",
+ride3 = Ride.create!(origin: "Rotterdam", destination: "Delft", date: Date.new(2024, 6, 20), start_time: "10:00",
                      remarks: "No food allowed", price_per_km: 0.7, seats: 4, driver: driverMarie)
-ride4 = Ride.create!(origin: "Utrecht", destination: "Rotterdam", date: Date.new(2024, 6, 5), start_time: "16:00",
+ride4 = Ride.create!(origin: "Utrecht", destination: "Rotterdam", date: Date.new(2024, 6, 19), start_time: "16:00",
                      remarks: "No loud music allowed", price_per_km: 0.8, seats: 1, driver: driverMatilda)
 
 puts "Creating bookings..."
