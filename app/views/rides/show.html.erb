@@ -1,1 +1,26 @@
-<%= link_to "Back", :back, class: "fa-solid fa-arrow-left arrow" %>
+<div class="container">
+  <%= link_to image_tag("arrow-left.svg", alt:"back"), rides_path%>
+  <h1><strong>Your selected ride:</strong></h1>
+
+  <div class="show-card">
+    <%= image_tag("line.svg", alt: "journey") %>
+    <div>
+      <div class="location d-flex">
+        <h1><strong><%= @ride.origin %></strong></h1>
+      </div>
+      <div class="location">
+        <h1 class="destination"><strong><%= @ride.destination %></strong></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="driver-info d-flex">
+    <div>
+      <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+    </div>
+    <div>
+      <h2><%= @ride.driver.user.first_name %></h2>
+      <p><%= @ride.driver.car_model %></p>
+    </div>
+  </div>
+</div>

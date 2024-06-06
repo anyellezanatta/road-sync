@@ -1,0 +1,26 @@
+.show-card {
+  padding: 10px;
+  background-color: $light-gray;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+
+  h1 {
+    color: $medium-blue;
+    margin-left: 5px;
+  }
+
+  .destination {
+    margin-top: 60px;
+    margin-bottom: 0px;
+    text-align: end;
+  }
+
+  img, svg {
+    align-self: first baseline;
+  }
+}
+
+.location {
+  display:flex;
+  // flex-direction: ;
+}
