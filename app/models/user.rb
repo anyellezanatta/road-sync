@@ -10,4 +10,11 @@ class User < ApplicationRecord
   has_many :rides, through: :drivers
   has_many :reviewer_reviews, class_name: 'Review', foreign_key: 'reviewer_id'
   has_many :receiver_reviews, class_name: 'Review', foreign_key: 'receiver_id'
+
+
+  def driver_bookings
+    Booking.joins(ride: :driver)
+           .where(drivers: { user: self })
+  end
+
 end
