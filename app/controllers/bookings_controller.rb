@@ -14,6 +14,18 @@ class BookingsController < ApplicationController
     end
   end
 
+  def cancel
+    @booking = Booking.find(params[:id])
+    if @booking.is_pending? || @booking.is_confirmed?
+      @booking.status = 'cancelled'
+      @booking.save
+
+      redirect_to dashboard_path
+    else
+      render "pages/dashboard", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def booking_params
