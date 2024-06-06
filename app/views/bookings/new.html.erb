@@ -1,0 +1,4 @@
+<%= simple_form_for([@ride, @booking]) do |f| %>
+  <%= f.input :seats%>
+  <%= f.button :submit, "book", class: "btn" %>
+<% end %>
