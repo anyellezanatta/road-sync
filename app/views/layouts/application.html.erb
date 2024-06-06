@@ -13,7 +13,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "shared/header" %>
+    <div style='margin-top: 20px'>
+      <%= yield %>
+    </div>
     <%= render "shared/navbar" %>
   </body>
 </html>
