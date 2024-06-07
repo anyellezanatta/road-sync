@@ -14,4 +14,40 @@
 body {
   background-color: white;
   margin-bottom: 100px;
+  justify-content: center;
+}
+
+h1 {
+  font-family: $headers-font;
+  font-weight: 300;
+  color: $light-blue;
+}
+
+p {
+  font-family: $headers-font;
+}
+
+.form {
+  font-family: $headers-font;
+}
+
+.container {
+  font-family: $headers-font;
+
+}
+
+.header-head {
+  font-family: $headers-font;
+}
+
+.btn {
+  color: white;
+  background-color: $light-blue;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background: $medium-blue;
+  color: white;
+  border: 1px solid $medium-blue ;
 }

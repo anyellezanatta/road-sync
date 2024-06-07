@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container home-container">
   <h1><strong>Find a ride to your destination</strong></h1>
-  <p>Enter your journey details, hop in & go!</p>
+  <p><strong>Enter your journey details, hop in & go!</strong></p>
   <%= render 'form' %>
 </div>
   <%= image_tag "home.jpg", id: "home-img", alt: "Two people traveling together in a car" %>
 <div class="container home-container benefits">
-  <h1><strong><em>"Wherever you go, Sync you flow..."</em></strong></h1>
-  <h2><strong>Why RoadSync?</strong></h2>
+  <h2><em>"Wherever you go <br>-<br> Sync you flow!"</em></h2>
+  <h1><strong>Why RoadSync?</strong></h1>
   <div class="benefits-card">
     <h2><strong>Saving costs</strong></h2>
     <%= image_tag "save_money.png", alt: "Two people traveling together in a car" %>
@@ -21,7 +21,7 @@
   </div>
   <div class="benefits-card">
     <h2><strong>Social Benefits</strong></h2>
-    <%= image_tag "social.png", alt: "Two people traveling together in a car" %>
+    <%= image_tag "social.png", id: "social-img", alt: "Two people traveling together in a car" %>
     <h5>Getting in touch with new people</h5>
     <h5>Enhanced Safety with a shared ride </h5>
   </div>
