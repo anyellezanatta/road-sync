@@ -1,1 +1,61 @@
-<%= link_to "Back", :back, class: "fa-solid fa-arrow-left arrow" %>
+<div class="container">
+  <%= link_to image_tag("arrow-left.svg", alt:"back"), rides_path%>
+  <h1><strong>Your selected ride:</strong></h1>
+
+
+
+  <div class="show-card">
+
+    <div class="show-info-icon">
+      <%= image_tag("line.svg", alt: "journey") %>
+      <div class="location align-self-center">
+        <h1><strong><%= @ride.origin %></strong></h1>
+        <h1 class="destination"><strong><%= @ride.destination %></strong></h1>
+      </div>
+    </div>
+
+    <div class="price-time">
+      <p class="time"><%= @ride.start_time.hour %>:<%= @ride.start_time.min %>0</p>
+      <p class="price"><%= @ride.price_per_km %> €/km</p>
+    </div>
+
+  </div>
+
+  <div class="driver-info">
+    <div class="driver">
+      <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+      <div>
+        <h2><%= @ride.driver.user.first_name %></h2>
+        <p><%= @ride.driver.car_model %></p>
+      </div>
+    </div>
+    <%= link_to image_tag("chat.svg", alt:"chat with driver"), root_path%>
+  </div>
+
+  <div class="book-form">
+    <%= simple_form_for ([@ride, @booking]), html: {class: "book-form"} do |f| %>
+        <%= f.input :seats, input_html: {value: 1}, class: "input-box" %>
+        <div class="book-btn">
+        <%= f.button :submit, "Book" %>
+        </div>
+    <% end %>
+  </div>
+
+  <div class="show-reviews">
+    <h2>Driver Reviews</h2>
+    <% if @reviews.nil? %>
+      <p>No reviews yet</p>
+    <% else %>
+      <% @reviews.each do |review| %>
+        <div class="review-card">
+          <%= cl_image_tag review.reviewer.photo.key, crop: :fill, class:"avatar-bordered" %>
+          <div class="review-info">
+            <h3><%= review.reviewer.first_name %></h3>
+            <p><%= review.reviewer.first_name %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
