@@ -1,0 +1,52 @@
+.avatar-large {
+  margin: 40px;
+  height: 60px;
+  width: 60px;
+  border: 2px solid #0A4B57;
+}
+
+.details {
+  margin: 30px;
+  color: #0A4B57;
+}
+
+.recent {
+  font-size: 40px;
+  font-weight: bold;
+  color:#1291A8;
+  margin:20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.reviews {
+  align-content: flex-end;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+#recent-ride-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  height:20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.second image {
+  padding-bottom: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  color:#1291A8;
+  margin:20px;
+  font-family: 'Times New Roman', Times, serif;
+}
