@@ -2,13 +2,13 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: #2CC1DB;
+  background: $light-blue;
   transition: background 0.3s ease;
-  border: 1px solid #2CC1DB;
+  border: 1px solid $light-blue;
 }
 
 .btn-primary:hover {
-  background: #1291A8;
+  background: $light-blue;
   color: white;
-  border: 1px solid #1291A8 ;
+  border: 1px solid $light-blue ;
 }

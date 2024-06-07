@@ -1,8 +1,8 @@
 
-.btn {
-  color: $light-gray;
-  background-color: $medium-blue;
-}
+// .btn {
+//   color: white;
+//   background-color: $light-blue;
+// }
 
 .home-container {
   margin-top: 20px;
@@ -14,12 +14,17 @@
 
   h2 {
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   h1 {
     color: $light-blue;
+    margin: 10px;
   }
 
+  p {
+    margin: 20px;
+  }
 }
 
 #home-img {
@@ -29,4 +34,9 @@
 
 .home-form {
   margin: 0 20px;
+}
+
+#social-img {
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
