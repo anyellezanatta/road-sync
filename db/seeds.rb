@@ -65,9 +65,20 @@ ride3 = Ride.create!(origin: "Rotterdam", destination: "Delft", date: Date.new(2
 ride4 = Ride.create!(origin: "Utrecht", destination: "Rotterdam", date: Date.new(2024, 6, 19), start_time: "16:00",
                      remarks: "No loud music allowed", price_per_km: 0.8, seats: 1, driver: driverMatilda)
 
+ride5 = Ride.create!(origin: "Utrecht", destination: "Rotterdam", date: Date.new(2024, 5, 5), start_time: "16:00",
+                     remarks: "No loud music allowed", price_per_km: 0.8, seats: 1, driver: driverMatilda)
+
+
 puts "Creating bookings..."
 booking1 = Booking.create!(ride: ride1, user: parikaya, seats: 2, status: "confirmed")
 booking2 = Booking.create!(ride: ride2, user: marie, seats: 1, status: "pending")
+Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
+Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
+Booking.create!(ride: ride4, user: marie, seats: 1, status: "confirmed")
+Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
+Booking.create!(ride: ride1, user: marie, seats: 1, status: "confirmed")
+Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
+
 booking3 = Booking.create!(ride: ride3, user: matilda, seats: 3, status: "confirmed")
 booking4 = Booking.create!(ride: ride4, user: anyelle, seats: 1, status: "declined")
 
