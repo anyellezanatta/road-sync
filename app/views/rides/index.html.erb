@@ -2,10 +2,11 @@
   <div class="title-card">
     <div class="title">
       <%= link_to image_tag("arrow-left.svg", alt:"back"), root_path%>
-      <h2>Available rides to:</h2>
-      <h1>Schiphol Airport</h1>
+      <h2><%= "Available rides to:" unless @destination.blank?  %></h2>
+      <h1><%= @destination %></h1>
+      <p><%= "On #{@date.strftime('%d %b %Y')}" unless @date.blank? %></>
     </div>
-    <%= image_tag("car.png", alt:"car", class: "title-img")%>
+    <%= image_tag("car-icon.svg", alt:"car", class: "title-img")%>
   </div>
   <div class="container-ride-card">
     <% @rides.each do |ride|%>
