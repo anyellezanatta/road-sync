@@ -1,42 +1,11 @@
-.book-form {
+.show-container{
   display: flex;
-  background-color: $light-gray;
-  padding-left: 10px;
-  margin-bottom: 20px;
-  padding-top: 10px;
-
-  .input-box {
-    flex-grow: 1;
-   }
+  flex-direction: column;
+  gap: 20px;
 }
 
-.input:focus {
-  outline: none;
-  box-shadow: 0 0 5px 2px $medium-blue;
-}
-
-.show-reviews {
+.reviews-list {
   display: flex;
   flex-direction: column;
   gap:20px;
-}
-
-.review-card {
-  display: flex;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  background-color:$light-gray;
-  align-items: center;
-  }
-
-.review-info {
-
-  margin-left: 10px;
-}
-
-.book-btn {
-  align-self: self-end;
-  padding: 6px 12px;
-  margin-bottom: 10px;
 }
