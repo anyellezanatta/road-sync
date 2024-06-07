@@ -64,13 +64,15 @@
         </div>
     <% end %>
   <% else %>
-    <div class="no-recent-bookings ml-5">
+    <div class="no-recent-bookings ms-3">
       <p>No recent bookings at the moment</p>
     </div>
   <% end %>
 
 
-
+  <div class="recent">
+    <h1>Upcoming rides</h1>
+  </div>
 
   <%# Upcoming rides %>
   <% @driver_bookings.each do |booking| %>
