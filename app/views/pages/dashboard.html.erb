@@ -1,102 +1,122 @@
 <%# profile %>
-<div class="d-flex">
-  <%= cl_image_tag current_user.photo.key, class: "avatar-large" %>
+<% if user_signed_in? %>
 
-  <div class="details">
-    <p><%= current_user.first_name %> <%= current_user.last_name %></p>
-    <p><%= current_user.email %></p>
-    <p><%= current_user.phone_number %></p>
-  </div>
-</div>
+  <div class="d-flex">
+    <%= cl_image_tag current_user.photo.key, class: "avatar-large" %>
 
-<%# your request %>
-<div class="first-title">
-<h1>Your Request</h1>
-</div>
-
-<% @bookings.each do |booking| %>
-  <% if booking.status != 'cancelled' && booking.status != 'declined' %>
-
-    <div class="card mx-3 py-3 px-3 d-flex">
-      <div>
-        <p><strong><%= booking.ride.driver.user.first_name %></strong></p>
-        <p><%= booking.ride.origin %> - <%= booking.ride.destination %></p>
-        <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
-      </div>
-      <div class="">
-        <%= link_to 'Cancel', cancel_booking_path(booking), class: 'btn btn-primary', data: { "turbo-method": :patch }  %>
-      </div>
+    <div class="details">
+      <p><%= current_user.first_name %> <%= current_user.last_name %></p>
+      <p><%= current_user.email %></p>
+      <p><%= current_user.phone_number %></p>
     </div>
-  <% end %>
-<% end %>
-
-
-<%# Recent rides %>
-<div class="recent">
-  <p>Previous rides</p>
-</div>
+  </div>
 
 
 
+  <%# your request %>
+  <div class="first-title">
+  <h1>Your Request</h1>
+  </div>
 
- <% @bookings.each do |booking| %>
-  <% if  booking.ride.date < Date.today %>
-    <div class="card mx-2 py-2">
-      <div id="recent-ride-card" class="px-3">
+  <% @bookings.each do |booking| %>
+    <% if booking.status != 'cancelled' && booking.status != 'declined' %>
+
+      <div class="card mx-3 py-3 px-3 d-flex mb-4">
         <div>
-          <%= image_tag "car.png" %>
-        </div>
-
-        <div>
-          <p><strong><%= booking.ride.destination %></strong></p>
+          <p><strong><%= booking.ride.driver.user.first_name %></strong></p>
+          <p><%= booking.ride.origin %> - <%= booking.ride.destination %></p>
           <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
         </div>
         <div class="">
-          <%= link_to 'Review', '#', class: 'btn btn-primary'  %>
+          <%= link_to 'Cancel', cancel_booking_path(booking), class: 'btn btn-primary', data: { "turbo-method": :patch }  %>
         </div>
       </div>
-
-    </div>
-  <% else %>
-    <p>No recent bookings at the moment</p>
+    <% end %>
   <% end %>
- <% end %>
 
 
-<%# Upcoming rides %>
-<% @driver_bookings.each do |booking| %>
-  <div class="card mx-2 py-2 mt-4">
-    <div id="upcoming-rides" class="px-3">
-
-      <div>
-        <p><strong><%= booking.ride.origin %></strong></p>
-        <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
-        <p><strong><%= booking.ride.destination %></strong></p>
-      </div>
+  <%# Recent rides %>
+  <div class="recent">
+    <h1>Previous rides</h1>
+  </div>
 
 
+  <%# Check if there are bookings before today %>
+  <%  @bookings = @bookings.select { |booking| booking.ride.date < Date.today } %>
 
-      <div class="icon d-flex">
-        <div class="image">
+  <% if @bookings.count > 0 %>
+    <% @bookings.each do |booking| %>
+        <div class="card mx-3 py-2">
+          <div id="recent-ride-card" class="px-3">
+            <div>
+              <%= image_tag "car.png" %>
+            </div>
+
+            <div>
+              <p><strong><%= booking.ride.destination %></strong></p>
+              <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
+            </div>
+            <div class="">
+              <%= link_to 'Review', '#', class: 'btn btn-primary'  %>
+            </div>
+          </div>
+
+        </div>
+    <% end %>
+  <% else %>
+    <div class="no-recent-bookings ml-5">
+      <p>No recent bookings at the moment</p>
+    </div>
+  <% end %>
+
+
+
+
+  <%# Upcoming rides %>
+  <% @driver_bookings.each do |booking| %>
+    <div class="card mx-3 py-2 mt-4">
+      <div id="upcoming-rides" class="px-3">
+        <div class="line d-flex">
+
+          <div class="third-image">
+            <%= image_tag "line.svg" %>
+          </div>
+
+        <div class="text align-self-center">
+          <p><strong><%= booking.ride.origin %></strong></p>
+          <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
+          <p><strong><%= booking.ride.destination %></strong></p>
+        </div>
+        </div>
+
+
+
+
+        <div class="icon d-flex">
+          <div class="image">
+            <%= image_tag "icon dashboard.png" %>
+          </div>
+              <%# <img src="" alt=""> %>
+          <p><%= booking.user.first_name %></p>
+        </div>
+
+      <div class="image d-flex mb-3">
+        <div class="second image">
           <%= image_tag "icon dashboard.png" %>
         </div>
-            <%# <img src="" alt=""> %>
+
+
         <p><%= booking.user.first_name %></p>
       </div>
+      </div>
 
-    <div class="image d-flex">
-      <div class="second image">
-        <%= image_tag "icon dashboard.png" %>
       </div>
 
 
-      <p><%= booking.user.first_name %></p>
+      </div>
     </div>
-    </div>
-
-    </div>
-
-
-    </div>
-  </div>
+  <% end %>
 <% end %>
+  <div class="logout-button">
+    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-primary" %>
+  </div>
