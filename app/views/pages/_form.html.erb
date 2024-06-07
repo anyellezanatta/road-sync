@@ -1,4 +1,4 @@
-<%= simple_form_for :search, url: rides_path, method: :get, html: { class: "form-control d-flex" } do |f| %>
+<%= simple_form_for :search, url: rides_path, method: :get, html: { class: "home-form" } do |f| %>
   <%= f.input :origin, input_html: { class: "input", placeholder: "Where are you starting from?" }, value: params[:origin], label: false %>
   <%= f.input :destination, input_html: { class: "input", placeholder: "Where are you going?" }, value: params[:destination], label: false %>
   <%= f.input :date, input_html: { class: "input", placeholder: "When are you going?", data: { controller: "datepicker" } }, value: params[:date], label: false %>

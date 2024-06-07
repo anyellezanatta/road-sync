@@ -5,17 +5,28 @@
 }
 
 .home-container {
+  margin-top: 20px;
   text-align: center;
 
   img {
-    width: 100%;
+    width: 290px;
   }
 
   h2 {
     margin-top: 20px;
   }
+
+  h1 {
+    color: $light-blue;
+  }
+
 }
 
 #home-img {
+  margin-top: 20px;
   width: 390px;
+}
+
+.home-form {
+  margin: 0 20px;
 }

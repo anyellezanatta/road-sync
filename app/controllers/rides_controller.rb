@@ -1,4 +1,11 @@
 class RidesController < ApplicationController
+  def show
+    @ride = Ride.find(params[:id])
+    @booking = Booking.new
+    # @users = User.all
+    @reviews = Review.where(receiver_id: @ride.driver.user_id)
+  end
+
   def index
     @rides = Ride.all
 
