@@ -15,6 +15,7 @@
   font-weight: bold;
   color:#1291A8;
   margin:20px;
+  margin-left: 16px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -49,11 +50,20 @@
 }
 
 .logout-button {
-  margin-top: 10px;
+  margin-top: 30px;
   margin-left: 12px;
   align-self: flex-end;
   justify-content: flex-end;
   text-align: right;
   margin-right: 15px;
 
+}
+
+.first-title {
+  margin-left: 16px;
+}
+
+.no-recent-bookings {
+  margin-right: 15px;
+  font-weight: bold;
 }
