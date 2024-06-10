@@ -36,22 +36,22 @@ puts "Creating drivers..."
 
 driverAnyelle = Driver.create!(user: anyelle, car_model: "Tesla Model 3", car_color: "black", car_plate: "1234ABC",
                                dl_number: "1234567890")
-fileAnyelle = URI.open("https://source.unsplash.com/random/?car+#{driverAnyelle.car_model}")
+fileAnyelle = URI.open("https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960")
 driverAnyelle.photo.attach(io: fileAnyelle, filename: "#{driverAnyelle.car_model}.png", content_type: 'image/png')
 
 driverParikaya = Driver.create!(user: parikaya, car_model: "Tesla Model S", car_color: "white", car_plate: "5678DEF",
                                 dl_number: "0987654321")
-fileParikaya = URI.open("https://source.unsplash.com/random/?car+#{driverParikaya.car_model}")
+fileParikaya = URI.open("https://i.ebayimg.com/images/g/jjAAAOSwz9ZmCI67/s-l1600.jpg")
 driverParikaya.photo.attach(io: fileParikaya, filename: "#{driverParikaya.car_model}.png", content_type: 'image/png')
 
 driverMarie = Driver.create!(user: marie, car_model: "Tesla Model X", car_color: "blue", car_plate: "9012GHI",
                              dl_number: "5432167890")
-fileMarie = URI.open("https://source.unsplash.com/random/?car+#{driverMarie.car_model}")
+fileMarie = URI.open("https://i.ebayimg.com/images/g/jjAAAOSwz9ZmCI67/s-l1600.jpg")
 driverMarie.photo.attach(io: fileMarie, filename: "#{driverMarie.car_model}.png", content_type: 'image/png')
 
 driverMatilda = Driver.create!(user: matilda, car_model: "Tesla Model Y", car_color: "red", car_plate: "3456JKL",
                                dl_number: "6789054321")
-fileMatilda = URI.open("https://source.unsplash.com/random/?car+#{driverMatilda.car_model}")
+fileMatilda = URI.open("https://i.ebayimg.com/images/g/jjAAAOSwz9ZmCI67/s-l1600.jpg")
 driverMatilda.photo.attach(io: fileMatilda, filename: "#{driverMatilda.car_model}.png", content_type: 'image/png')
 
 puts "Creating rides..."
