@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_100506) do
     t.bigint "booking_id", null: false
     t.bigint "reviewer_id", null: false
     t.bigint "receiver_id", null: false
-    t.float "rating"
+    t.integer "rating", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_reviews_on_booking_id"

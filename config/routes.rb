@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :rides do
+  resources :bookings do
     resources :reviews, only: [:new, :create]
   end
 end

@@ -1,5 +1,20 @@
-<h1>New review</h1>
-<%= simple_form_for [@ride, @review] do |f| %>
-  <%= f.input :content %>
-  <%= f.submit "Submit review", class: "btn btn-primary" %>
-<% end %>
+<div class="Review-Form">
+  <h1>New review</h1>
+
+<!-- Add icon library -->
+<%# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> %>
+
+<%# <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span> %>
+
+
+
+  <%= simple_form_for [@booking, @review] do |f| %>
+    <%= f.input :rating, collection: 0..5 %>
+    <%= f.input :comment %>
+    <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <% end %>
+</div>
