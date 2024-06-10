@@ -22,7 +22,7 @@
       <h2><%= @ride.driver.user.first_name %></h2>
       <p><%= @ride.driver.car_model %></p>
     </div>
-    <%= link_to image_tag("chat.svg", alt:"chat with driver"), root_path%>
+    <%= link_to image_tag("chat.svg", alt:"chat with driver"), root_path %>
   </div>
   <%= simple_form_for ([@ride, @booking]), html: {class: "ride-book-card"} do |f| %>
     <div class="ride-book-input">
