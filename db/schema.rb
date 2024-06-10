@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_133537) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_125511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,6 +87,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_133537) do
     t.index ["ride_id"], name: "index_reviews_on_ride_id"
   end
 
+  create_table "ride_points", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_ride_points_on_ride_id"
+  end
+
   create_table "rides", force: :cascade do |t|
     t.bigint "driver_id", null: false
     t.integer "seats"
@@ -130,5 +139,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_133537) do
   add_foreign_key "reviews", "rides"
   add_foreign_key "reviews", "users", column: "receiver_id"
   add_foreign_key "reviews", "users", column: "reviewer_id"
+  add_foreign_key "ride_points", "rides"
   add_foreign_key "rides", "drivers"
 end
