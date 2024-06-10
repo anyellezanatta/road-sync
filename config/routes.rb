@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :rides, except: [:destroy] do
     resources :bookings, only: %i[index create]
-    resources :chatrooms, only: %i[show] do
+    resources :chatrooms, only: %i[show create] do
       resources :messages, only: %i[create]
     end
     resources :reviews, only: %i[create]
