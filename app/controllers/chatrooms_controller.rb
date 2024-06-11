@@ -1,6 +1,6 @@
 class ChatroomsController < ApplicationController
   def index
-    @chatrooms = Chatroom.where(user: current_user)
+    @chatrooms = Chatroom.where(driver: current_user).or(Chatroom.where(passenger: current_user))
   end
 
   def new

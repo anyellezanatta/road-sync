@@ -3,13 +3,18 @@
     <% @chatrooms.each do |chatroom| %>
       <div class="chatroom">
         <div class="chatroom-content">
-          <h2><%= chatroom.name %></h2>
-          <p><%= chatroom.description %></p>
-          <p><strong><%= chatroom.messages.count %></strong> messages</p>
+          <div class="notification">
+            <%= cl_image_tag chatroom.messages.last.user.photo.key, crop: :fill, class:"avatar-bordered" %>
+            <div class="notification-content">
+                <strong><%= chatroom.messages.last.user.first_name %></strong>
+                <small><i><%= chatroom.messages.last.created_at.strftime("%a %b %e at %l:%M %p") %></i></small>
+                <small><p><%= chatroom.messages.last.content %></p>
+              </div></small>
+            </div>
         </div>
-        <div class="chatroom-actions">
-          <%= link_to "Join", chatroom_path(chatroom), class: "btn btn-primary" %>
-        </div>
+        <%# <div class="chatroom-actions">
+          <%= link_to "Join", ride_chatroom_path(chatroom.ride_id, chatroom), class: "btn btn-primary" %>
+        <%# </div> %>
       </div>
     <% end %>
   </div>
