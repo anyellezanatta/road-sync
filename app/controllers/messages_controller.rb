@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-#get access to all params required for message creation
   def index
     @message = Message.new
     @messages = Message.where(chatroom_id: params[:id])
@@ -9,12 +8,12 @@ class MessagesController < ApplicationController
     @chatroom = Chatroom.find(params[:chatroom_id])
     @message = Message.create(message_params)
     @message.chatroom = @chatroom
-    # @message.ride_id = params[:ride_id]
     @message.user = current_user
     if @message.save
       ChatroomChannel.broadcast_to(
         @chatroom,
-        render_to_string(partial: "message", locals: {message: @message})
+        message: render_to_string(partial: "message", locals: { message: @message }),
+        sender_id: @message.user.id
       )
 
       # redirect_to ride_chatroom_path(@chatroom.ride, @chatroom)
