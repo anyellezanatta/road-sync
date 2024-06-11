@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: %i[create]
   end
+
+  resources :chatrooms, only: %i[index]
 end
