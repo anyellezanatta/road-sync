@@ -12,4 +12,9 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: %i[create]
   end
+
+
+  resources :bookings do
+    resources :reviews, only: [:new, :create]
+  end
 end

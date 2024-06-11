@@ -5,6 +5,7 @@ class Booking < ApplicationRecord
   belongs_to :ride
   belongs_to :user
   has_many :messages
+  has_many :reviews
 
   def is_pending?
     status == 'pending'
