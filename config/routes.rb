@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "dashboard", to: "pages#dashboard"
   get "uikit", to: "pages#uikit"
+
   patch "bookings/:id/cancel", to: "bookings#cancel", as: "cancel_booking"
 
   resources :rides, except: [:destroy] do
@@ -11,4 +12,5 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: %i[create]
   end
+  resources :drivers, only: [:show]
 end

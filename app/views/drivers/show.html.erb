@@ -1,0 +1,58 @@
+<div class="container" id="driver-profile">
+    <div class="driver-card">
+      <div class="name-photo-card mx-4 mt-3 d-flex justify-content-between">
+        <%= cl_image_tag current_user.photo.key, class: "driver-avatar" %>
+          <div class="name align-self-center">
+            <h2><%= @driver.user.first_name %> <%= @driver.user.last_name %></h2>
+          </div>
+      </div>
+
+      <div class="details">
+        <p><%= image_tag 'mail.svg' %>  <%= @driver.user.email %></p>
+        <p><%= image_tag 'phone.svg' %> <%= @driver.user.phone_number %></p>
+        <p>
+          <span style='color: #0A4B57'>
+            <i class="fa-regular fa-id-card"></i>
+          </span>
+          <%= @driver.dl_number %>
+        </p>
+        <p><%= image_tag 'driverlicense.png', class: "icon-driver-img" %> <%= @driver.car_plate %></p>
+        <p>
+          <span style='color: #0A4B57'>
+            <i class="fa-solid fa-car"></i>
+          </span>
+          <%= @driver.car_model %>
+        </p>
+        <p><strong>color : </strong><%= @driver.car_color %></p>
+      </div>
+    </div>
+
+  <div class="header-position d-flex justify-content-between">
+    <div class="align-self-center">
+      <h1 class="mb-0">Reviews</h1>
+    </div>
+    <div>
+      <%= image_tag("driverprofile2.svg", alt:"car", class: "title-img")%>
+    </div>
+  </div>
+
+  <div class="reviews-list d-flex">
+    <% if @reviews.nil? %>
+      <div class="review-card">
+        <p>No reviews yet</p>
+      </div>
+    <% else %>
+      <% @reviews.each do |review| %>
+        <div class="review-card">
+          <div>
+            <%= cl_image_tag review.reviewer.photo.key, crop: :fill, class:"avatar-bordered review-avatar" %>
+          </div>
+          <div class="review-info">
+            <h3><%= review.reviewer.first_name %></h3>
+            <p><%= review.comments %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
