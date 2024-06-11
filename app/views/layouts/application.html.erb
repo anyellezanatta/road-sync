@@ -6,12 +6,17 @@
     <%= favicon_link_tag 'logo.png' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps-web.min.js"></script>
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/maps/maps.css">
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.1/services/services-web.min.js"></script>
+    <%#
+      <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.19.0
+        /services/services-web.min.js">
+      </script>  %>
   </head>
-
   <body>
     <%= render "shared/header" %>
     <div style='margin-top: 20px'>

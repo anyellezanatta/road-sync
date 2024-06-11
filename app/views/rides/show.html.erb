@@ -3,6 +3,7 @@
     <%= link_to image_tag("arrow-left.svg", alt:"back"), rides_path%>
     <h2>Your selected ride:</h2>
   </div>
+  <%= render "map", map_data: @map_data%>
   <div class="line-ride-card">
     <%= image_tag("line.svg", alt: "journey") %>
     <div class="show-info">

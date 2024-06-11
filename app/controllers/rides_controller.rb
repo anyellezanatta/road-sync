@@ -3,8 +3,18 @@ require_relative "../services/tomtom_service"
 class RidesController < ApplicationController
   def show
     @ride = Ride.find(params[:id])
+
+    geocodedOrigin = geocodedAddresses(params[:origin])
+    geocodedDestination = geocodedAddresses(params[:destination])
+
+    @map_data = { ride: { origin: { latitude: @ride.origin_latitude, longitude: @ride.origin_longitude },
+                          destination: { latitude: @ride.destination_latitude,
+                                         longitude: @ride.destination_longitude } },
+                  user: { origin: { latitude: geocodedOrigin.latitude, longitude: geocodedOrigin.longitude },
+                          destination: { latitude: geocodedDestination.latitude,
+                                         longitude: geocodedDestination.longitude } } }.to_json
+
     @booking = Booking.new
-    # @users = User.all
     @reviews = Review.where(receiver_id: @ride.driver.user_id)
   end
 
@@ -18,7 +28,7 @@ class RidesController < ApplicationController
     return unless params[:search].present?
     return unless search[:origin].present? || search[:destination].present? || search[:date].present?
 
-    origin = search[:origin].downcase
+    @origin = search[:origin].downcase
     @destination = search[:destination].downcase
     @date = Date.parse(search[:date])
     passengers = search[:seats].to_i
@@ -26,8 +36,8 @@ class RidesController < ApplicationController
     @rides = @rides.where(sql_subquery, date: @date,
                                         passengers:).order(:start_time)
 
-    geocodedOrigin = Geocoder.search(origin).first
-    geocodedDestination = Geocoder.search(@destination).first
+    geocodedOrigin = geocodedAddresses(@origin)
+    geocodedDestination = geocodedAddresses(@destination)
 
     user_response = tomtom_service.calculate_route("#{geocodedOrigin.latitude},#{geocodedOrigin.longitude}",
                                                    "#{geocodedDestination.latitude},#{geocodedDestination.longitude}")
@@ -48,6 +58,10 @@ class RidesController < ApplicationController
     matching_points = user_points & driver_points
     matching_percentage = (matching_points.size.to_f / user_points.size) * 100
 
-    matching_percentage >= 80
+    matching_percentage >= 50
+  end
+
+  def geocodedAddresses(address)
+    Geocoder.search(address).first
   end
 end
