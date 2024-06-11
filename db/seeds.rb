@@ -9,6 +9,8 @@ Review.destroy_all
 Ride.destroy_all
 Driver.destroy_all
 User.destroy_all
+Message.destroy_all
+Chatroom.destroy_all
 
 puts "Creating users..."
 
@@ -56,28 +58,34 @@ driverMatilda.photo.attach(io: fileMatilda, filename: "#{driverMatilda.car_model
 
 puts "Creating rides..."
 
-ride1 = Ride.create!(origin: "Amsterdam", destination: "Sassenheim", date: Date.new(2024, 6, 15), start_time: "12:00",
-                     remarks: "No smoking allowed", price_per_km: 0.5, seats: 3, driver: driverAnyelle)
-ride2 = Ride.create!(origin: "Arnhem", destination: "Amsterdam", date: Date.new(2024, 6, 29), start_time: "14:00",
-                     remarks: "No pets allowed", price_per_km: 0.6, seats: 2, driver: driverParikaya)
-ride3 = Ride.create!(origin: "Rotterdam", destination: "Delft", date: Date.new(2024, 6, 20), start_time: "10:00",
-                     remarks: "No food allowed", price_per_km: 0.7, seats: 4, driver: driverMarie)
-ride4 = Ride.create!(origin: "Utrecht", destination: "Rotterdam", date: Date.new(2024, 6, 19), start_time: "16:00",
-                     remarks: "No loud music allowed", price_per_km: 0.8, seats: 1, driver: driverMatilda)
-
-ride5 = Ride.create!(origin: "Utrecht", destination: "Rotterdam", date: Date.new(2024, 5, 5), start_time: "16:00",
-                     remarks: "No loud music allowed", price_per_km: 0.8, seats: 1, driver: driverMatilda)
-
+ride1 = Ride.create!(origin: "Arnhem", destination: "Schipol",  origin_address: "Fortunastraat 34, 6846XZ Arnhem", destination_address: "Aankomstpassage 1, 1118 AX Schiphol", date: Date.new(2024, 6, 15), start_time: "12:00",
+                    remarks: "No smoking allowed", price_per_km: 0.5, seats: 3, driver: driverAnyelle)
+ride2 = Ride.create!(origin: "Utrecht", destination: "Amsterdam",  origin_address: "Lange Viestraat 3, 3511 BK Utrecht", destination_address: "IJsbaanpad 9, 1076 CV Amsterdam", date: Date.new(2024, 6, 17), start_time: "14:00",
+                    remarks: "No pets allowed", price_per_km: 0.6, seats: 2, driver: driverParikaya)
+ride3 = Ride.create!(origin: "Rotterdam", destination: "Delft",  origin_address: "Coolsingel 44, 3011 AD Rotterdam", destination_address: "Kleveringweg 2, 2616 LZ Delft", date: Date.new(2024, 6, 15), start_time: "10:00",
+                    remarks: "No food allowed", price_per_km: 0.7, seats: 3, driver: driverMatilda)
+ride4 = Ride.create!(origin: "Utrecht", destination: "Rotterdam",  origin_address: "Lange Viestraat 3, 3511 BK Utrecht", destination_address: "Coolsingel 44, 3011 AD Rotterdam", date: Date.new(2024, 6, 15), start_time: "16:00",
+                    remarks: "No loud music allowed", price_per_km: 0.8, seats: 2, driver: driverMatilda)
+ride5 = Ride.create!(origin: "Nijmegen", destination: "Amsterdam",  origin_address: "Molenstraat 101, 6511 HD Nijmegen", destination_address: "IJsbaanpad 9, 1076 CV Amsterdam", date: Date.new(2024, 6, 17), start_time: "16:00",
+                    remarks: "No loud music allowed", price_per_km: 0.8, seats: 2, driver: driverAnyelle)
+ride6 = Ride.create!(origin: "Amsterdam", destination: "Arnhem",  origin_address: "IJsbaanpad 9, 1076 CV Amsterdam", destination_address: "Fortunastraat 34, 6846XZ Arnhem", date: Date.new(2024, 6, 17), start_time: "16:00",
+                    remarks: "No loud music allowed", price_per_km: 0.8, seats: 2, driver: driverMarie)
+ride7 = Ride.create!(origin: "Arnhem", destination: "Utrecht",  origin_address: "Fortunastraat 34, 6846XZ Arnhem", destination_address: "Lange Viestraat 3, 3511 BK Utrecht", date: Date.new(2024, 6, 17), start_time: "16:00",
+                    remarks: "No pets allowed", price_per_km: 0.8, seats: 2, driver: driverAnyelle)
+ride8 = Ride.create!(origin: "Delft", destination: "Rotterdam",  origin_address: "Kleveringweg 2, 2616 LZ Delft", destination_address: "Coolsingel 44, 3011 AD Rotterdam", date: Date.new(2024, 6, 17), start_time: "16:00",
+                    remarks: "No pets allowed", price_per_km: 0.8, seats: 2, driver: driverMatilda)
 
 puts "Creating bookings..."
-booking1 = Booking.create!(ride: ride1, user: parikaya, seats: 2, status: "confirmed")
-booking2 = Booking.create!(ride: ride2, user: marie, seats: 1, status: "pending")
-Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
-Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
-Booking.create!(ride: ride4, user: marie, seats: 1, status: "confirmed")
-Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
-Booking.create!(ride: ride1, user: marie, seats: 1, status: "confirmed")
-Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
+Booking.create(ride: ride1, user: marie, status: "confirmed", seats: 1,
+                origin: "Ede", destination: "Utrecht", origin_address: "Arnhemseweg 2A, 6711 HA Ede", destination_address: "Lange Viestraat 3, 3511 BK Utrecht")
+# booking1 = Booking.create!(ride: ride1, user: parikaya, seats: 2, status: "confirmed")
+# booking2 = Booking.create!(ride: ride2, user: marie, seats: 1, status: "pending")
+# Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
+# Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
+# Booking.create!(ride: ride4, user: marie, seats: 1, status: "confirmed")
+# Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
+# Booking.create!(ride: ride1, user: marie, seats: 1, status: "confirmed")
+# Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
 
 booking3 = Booking.create!(ride: ride3, user: matilda, seats: 3, status: "confirmed")
 booking4 = Booking.create!(ride: ride4, user: anyelle, seats: 1, status: "declined")
