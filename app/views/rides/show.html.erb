@@ -22,7 +22,15 @@
       <h2><%= @ride.driver.user.first_name %></h2>
       <p><%= @ride.driver.car_model %></p>
     </div>
-    <%= link_to image_tag("chat.svg", alt:"chat with driver"), root_path%>
+    <%= simple_form_for ([@ride, @chatroom]) do |f| %>
+      <%= f.hidden_field :driver_id, value: @ride.driver.user.id %>
+      <%= f.hidden_field :passenger_id, value: current_user.id %>
+      <%= f.hidden_field :ride_id, value: @ride.id %>
+      <%= f.submit style: "display:none;" %>
+      <button type="button" onclick="document.querySelector('form').submit();" class="button-with-svg">
+        <%= image_tag('chat.svg', alt: 'Chat with driver') %>
+      </button>
+    <% end %>
   </div>
   <%= simple_form_for ([@ride, @booking]), html: {class: "ride-book-card"} do |f| %>
     <div class="ride-book-input">
