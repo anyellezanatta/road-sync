@@ -9,3 +9,16 @@
   flex-direction: column;
   gap:20px;
 }
+
+.button-with-svg {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.button-with-svg img {
+  display: block;
+  height: 44px;
+  margin-top: 5px;
+}

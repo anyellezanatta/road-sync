@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   patch "bookings/:id/cancel", to: "bookings#cancel", as: "cancel_booking"
 
   resources :rides, except: [:destroy] do
-    resources :bookings, only: %i[index create] do
-      resources :messages, only: %i[index]
+    resources :bookings, only: %i[index create]
+    resources :chatrooms, only: %i[show create] do
+      resources :messages, only: %i[create]
     end
     resources :reviews, only: %i[create]
   end
-
   resources :chatrooms, only: %i[index]
+  resources :bookings do
+    resources :reviews, only: [:new, :create]
+  end
 end
