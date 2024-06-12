@@ -122,3 +122,4 @@ puts "Finished creating reviews!"
 # Message.create!(user: parikaya, chatroom: chatroom1, content: "Hi Anyelle, Can I bring my dog along?")
 
 # puts "Finished creating messages!"
+
