@@ -60,7 +60,7 @@ puts "Creating rides..."
 
 ride1 = Ride.create!(origin: "Arnhem", destination: "Schipol",  origin_address: "Fortunastraat 34, 6846XZ Arnhem", destination_address: "Aankomstpassage 1, 1118 AX Schiphol", date: Date.new(2024, 6, 15), start_time: "12:00",
                     remarks: "No smoking allowed", price_per_km: 0.5, seats: 3, driver: driverAnyelle)
-ride2 = Ride.create!(origin: "Utrecht", destination: "Amsterdam",  origin_address: "Lange Viestraat 3, 3511 BK Utrecht", destination_address: "IJsbaanpad 9, 1076 CV Amsterdam", date: Date.new(2024, 6, 17), start_time: "14:00",
+ride2 = Ride.create!(origin: "Utrecht", destination: "Amsterdam",  origin_address: "Van Deventerlaan 10, 3528 AE Utrecht", destination_address: "IJsbaanpad 9, 1076 CV Amsterdam", date: Date.new(2024, 6, 17), start_time: "14:00",
                     remarks: "No pets allowed", price_per_km: 0.6, seats: 2, driver: driverParikaya)
 ride3 = Ride.create!(origin: "Rotterdam", destination: "Delft",  origin_address: "Coolsingel 44, 3011 AD Rotterdam", destination_address: "Kleveringweg 2, 2616 LZ Delft", date: Date.new(2024, 6, 15), start_time: "10:00",
                     remarks: "No food allowed", price_per_km: 0.7, seats: 3, driver: driverMatilda)
@@ -76,8 +76,8 @@ ride8 = Ride.create!(origin: "Delft", destination: "Rotterdam",  origin_address:
                     remarks: "No pets allowed", price_per_km: 0.8, seats: 2, driver: driverMatilda)
 
 puts "Creating bookings..."
-Booking.create(ride: ride1, user: marie, status: "confirmed", seats: 1,
-                origin: "Ede", destination: "Utrecht", origin_address: "Arnhemseweg 2A, 6711 HA Ede", destination_address: "Lange Viestraat 3, 3511 BK Utrecht")
+Booking.create(ride: ride1, user: marie, status: "confirmed", seats: 1, origin: "Ede", origin_address: "Arnhemseweg 2A, 6711 HA Ede", destination: "Utrecht", destination_address: "Lange Viestraat 3, 3511 BK Utrecht")
+Booking.create(ride: ride2, user: matilda, status: "confirmed", seats: 1, origin: "Utrecht", origin_address: "Castle De Haar, Kasteellaan 1, 3455 RR Utrecht", destination: "Amsterdam", destination_address: "IKEA Amsterdam, Hullenbergweg 2, 1101 BL Amsterdam")
 # booking1 = Booking.create!(ride: ride1, user: parikaya, seats: 2, status: "confirmed")
 # booking2 = Booking.create!(ride: ride2, user: marie, seats: 1, status: "pending")
 # Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
