@@ -8,10 +8,11 @@ class ChatroomsController < ApplicationController
       if @existing_chatroom.nil?
         @chatroom = Chatroom.create(chatroom_params)
         if @chatroom.save
-          redirect_to ride_chatroom_path(chatroom_params["chatroom"][:ride_id], @chatroom)
+          redirect_to ride_chatroom_path(chatroom_params[:ride_id], @chatroom)
         end
+      else
+        redirect_to ride_chatroom_path(chatroom_params[:ride_id], @existing_chatroom)
       end
-      redirect_to ride_chatroom_path(chatroom_params[:ride_id], @existing_chatroom)
   end
 
   def  show
