@@ -1,0 +1,26 @@
+.container.chatroom {
+  display: flex;
+  flex-direction: column;
+  // height: 100vh;
+}
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 10px; /* To avoid content getting hidden behind the form */
+}
+
+.chat-form {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}

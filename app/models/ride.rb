@@ -1,7 +1,7 @@
 require_relative "../services/tomtom_service"
 class Ride < ApplicationRecord
   belongs_to :driver
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :bookings
   has_many :ride_points, dependent: :destroy
 
