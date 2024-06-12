@@ -19,6 +19,8 @@ class Ride < ApplicationRecord
 
     response = tomtom_service.calculate_route("#{origin_latitude},#{origin_longitude}",
                                               "#{destination_latitude},#{destination_longitude}")
+    return unless response["routes"].present?
+
     points = response["routes"].first["legs"].first["points"]
 
     points.each { |point| RidePoint.create(ride: self, latitude: point["latitude"], longitude: point["longitude"]) }
