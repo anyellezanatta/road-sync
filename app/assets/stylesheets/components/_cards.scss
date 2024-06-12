@@ -179,3 +179,40 @@
     width: 30px;
   }
 }
+
+.Euro-sign-icon {
+  justify-content: space-between;
+}
+
+.fa-solid {
+  margin-right: 6px;
+  flex-direction: column;
+  color: $light-blue;
+
+}
+
+.card-route {
+  justify-content: space-between;
+}
+
+.ride-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+
+}
+
+.Price-per-Hour {
+  color: $medium-blue;
+}
+
+.start-time {
+  color: $medium-blue;
+}
+
+.fa-regular {
+  margin-right: 6px;
+  flex-direction: column;
+  color: $light-blue;
+}

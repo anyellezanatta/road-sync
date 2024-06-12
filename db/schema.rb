@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_10_125511) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_105754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_125511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "seats"
+    t.string "origin"
+    t.string "origin_address"
+    t.string "destination"
+    t.string "destination_address"
+    t.float "origin_latitude"
+    t.float "origin_longitude"
+    t.float "destination_latitude"
+    t.float "destination_longitude"
     t.index ["ride_id"], name: "index_bookings_on_ride_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -122,6 +130,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_125511) do
     t.float "origin_longitude"
     t.float "destination_latitude"
     t.float "destination_longitude"
+    t.string "origin_address"
+    t.string "destination_address"
     t.index ["driver_id"], name: "index_rides_on_driver_id"
   end
 
