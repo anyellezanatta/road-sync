@@ -8,27 +8,43 @@
     </div>
     <%= image_tag("car-icon.svg", alt:"car", class: "title-img")%>
   </div>
+
   <div class="container-ride-card">
     <% @rides.each do |ride|%>
-      <%= link_to ride_path(ride), class: "link-ride" do %>
-        <div class="card-ride"">
+      <%= link_to ride_path(ride, origin: @origin, destination:@destination, date:@date, passengers:@passengers), class: "link-ride" do %>
+        <div class="card-ride">
           <div class="card-info">
-            <div class="card-route">
-              <h2><%= ride.origin %></h2>
-              <p>to</p>
-              <h2><%= ride.destination %></h2>
+            <%# Line %>
+            <div class="third-image">
+              <%= image_tag "line.svg" %>
             </div>
+
+            <%# Route %>
+            <div class='ride-info'>
+              <div class="card-route">
+                <h2><%= ride.origin %></h2>
+              </div>
+              <div class="second-part">
+                <h2><%= ride.destination %></h2>
+              </div>
+            </div>
+
+
+            <%# Avatar %>
             <div class="avatar-card">
               <%= cl_image_tag ride.driver.user.photo.key, crop: :fill, class:"avatar-bordered" %>
               <p class="avatar-name"><%= ride.driver.user.first_name %></p>
             </div>
           </div>
           <div class="card-available">
-            <p>available on:</p>
-            <p><%= ride.start_time.strftime('%H:%M') %></p>
+            <div class="Price-per-Hour">
+              <p><i class="fa-solid fa-euro-sign"></i><%= ride.price_per_km %> /km</p>
+            </div>
+            <p class="start-time"><i class="fa-regular fa-clock"></i><%= ride.start_time.strftime('%H:%M') %></p>
           </div>
         </div>
       <% end %>
     <%end %>
   </div>
+
 </div>

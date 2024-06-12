@@ -1,4 +1,8 @@
 class ChatroomsController < ApplicationController
+  def index
+    @chatrooms = Chatroom.where(driver: current_user).or(Chatroom.where(passenger: current_user))
+  end
+
   def new
     @chatroom = Chatroom.new
   end
@@ -15,7 +19,7 @@ class ChatroomsController < ApplicationController
       end
   end
 
-  def  show
+  def show
     @ride = Ride.find(params[:ride_id])
     @chatroom = Chatroom.find(params[:id])
     @messages = Message.where(chatroom: @chatroom)
@@ -25,6 +29,6 @@ class ChatroomsController < ApplicationController
   private
 
   def chatroom_params
-    params.require(:chatroom).permit(:ride_id, :driver_id, :passenger_id)
+    params.require(:chatroom).permit(:ride_id)
   end
 end

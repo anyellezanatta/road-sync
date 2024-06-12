@@ -2,7 +2,7 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
   data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
-  <%= link_to image_tag("arrow-left.svg", alt:"back"), ride_path(id: params[:ride_id]) %>
+  <%= link_to image_tag("arrow-left.svg", alt:"back"), ride_path(id: params[:ride_id], origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers]) %>
   <div class="chat-content">
     <div class="messages" data-chatroom-subscription-target="messages">
       <% if @messages.size > 0 %>
@@ -21,22 +21,22 @@
       <%= simple_form_for [@ride, @chatroom, @message],
       html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
       %>
-        <% if current_user != @chatroom.driver %>
-          <%= f.input :content,
+      <% if current_user != @chatroom.driver %>
+        <%= f.input :content,
             label: false,
             placeholder: "Message #{@chatroom.driver.first_name}",
             wrapper_html: { class: "flex-grow-1" }
           %>
-          <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-        <% else %>
-          <%= f.input :content,
+        <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+      <% else %>
+        <%= f.input :content,
             label: false,
             placeholder: "Message #{@chatroom.passenger.first_name}",
             wrapper_html: { class: "flex-grow-1" }
           %>
-          <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-        <% end %>
+        <%= f.submit "Send", class: "btn btn-primary mb-3" %>
       <% end %>
-    </div>
+    <% end %>
   </div>
+</div>
 </div>
