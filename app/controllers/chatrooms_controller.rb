@@ -8,18 +8,23 @@ class ChatroomsController < ApplicationController
   end
 
   def create
-    @existing_chatroom = Chatroom.find_by(ride_id: chatroom_params[:ride_id], driver_id: chatroom_params[:driver_id], passenger_id: chatroom_params[:passenger_id])
+    ride = Ride.find(params[:ride_id])
+    @existing_chatroom = Chatroom.find_by(ride_id: params[:ride_id], driver: ride.driver, passenger: current_user)
     if @existing_chatroom.nil?
-      @chatroom = Chatroom.create(chatroom_params)
+      @chatroom = Chatroom.new(chatroom_params)
+      @chatroom.driver = ride.driver
+      @chatroom.passenger = current_user
       if @chatroom.save
-        redirect_to ride_chatroom_path(chatroom_params[:ride_id], @chatroom)
+        redirect_to ride_chatroom_path(ride, @chatroom, origin: params[:origin], destination: params[:destination],
+                                                        date: params[:date], passengers: params[:passengers])
       end
     else
-      redirect_to ride_chatroom_path(chatroom_params[:ride_id], @existing_chatroom)
+      redirect_to ride_chatroom_path(ride, @existing_chatroom, origin: params[:origin],
+                                                               destination: params[:destination], date: params[:date], passengers: params[:passengers])
     end
   end
 
-  def  show
+  def show
     @ride = Ride.find(params[:ride_id])
     @chatroom = Chatroom.find(params[:id])
     @messages = Message.where(chatroom: @chatroom)
@@ -29,6 +34,6 @@ class ChatroomsController < ApplicationController
   private
 
   def chatroom_params
-    params.require(:chatroom).permit(:ride_id, :driver_id, :passenger_id)
+    params.require(:chatroom).permit(:ride_id)
   end
 end
