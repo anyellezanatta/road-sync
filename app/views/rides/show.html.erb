@@ -1,8 +1,8 @@
 <div class="container show-container">
-  <div class="title">
-    <%= link_to image_tag("arrow-left.svg", alt:"back"), rides_path%>
-    <h2>Your selected ride:</h2>
-  </div>
+  <%# <div class="title"> %>
+  <%# <h2>Your selected ride:</h2> %>
+  <%# </div> %>
+  <%= link_to image_tag("arrow-left.svg", alt:"back"), rides_path(origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers]), class: "back-button"%>
   <%= render "map", map_data: @map_data%>
   <div class="line-ride-card">
     <%= image_tag("line.svg", alt: "journey") %>
@@ -17,9 +17,6 @@
       </div>
     </div>
   </div>
-
-
-
   <%= link_to '#', class: "text-decoration-none text-darkblue" do %>
     <div class="driver-card">
       <%= cl_image_tag @ride.driver.user.photo.key, crop: :fill, class:"avatar-bordered" %>
@@ -38,11 +35,6 @@
       <% end %>
     </div>
   <% end %>
-
-
-
-
-
   <%= simple_form_for ([@ride, @booking]), html: {class: "ride-book-card"} do |f| %>
     <div class="ride-book-input">
       <%= f.input :seats, input_html: {value: 1}%>

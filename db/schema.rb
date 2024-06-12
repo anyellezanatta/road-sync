@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_610_125_511) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_125511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,8 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_610_125_511) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness",
-                                                             unique: true
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -54,6 +53,17 @@ ActiveRecord::Schema[7.1].define(version: 20_240_610_125_511) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.bigint "ride_id", null: false
+    t.bigint "driver_id", null: false
+    t.bigint "passenger_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_chatrooms_on_driver_id"
+    t.index ["passenger_id"], name: "index_chatrooms_on_passenger_id"
+    t.index ["ride_id"], name: "index_chatrooms_on_ride_id"
+  end
+
   create_table "drivers", force: :cascade do |t|
     t.string "dl_number"
     t.string "car_plate"
@@ -66,26 +76,26 @@ ActiveRecord::Schema[7.1].define(version: 20_240_610_125_511) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.bigint "booking_id", null: false
     t.bigint "user_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.bigint "chatroom_id"
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "comments"
-    t.integer "rating"
-    t.bigint "ride_id", null: false
+    t.text "comment"
+    t.bigint "booking_id", null: false
     t.bigint "reviewer_id", null: false
     t.bigint "receiver_id", null: false
+    t.integer "rating", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
     t.index ["receiver_id"], name: "index_reviews_on_receiver_id"
     t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
-    t.index ["ride_id"], name: "index_reviews_on_ride_id"
   end
 
   create_table "ride_points", force: :cascade do |t|
@@ -134,10 +144,13 @@ ActiveRecord::Schema[7.1].define(version: 20_240_610_125_511) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "rides"
   add_foreign_key "bookings", "users"
+  add_foreign_key "chatrooms", "rides"
+  add_foreign_key "chatrooms", "users", column: "driver_id"
+  add_foreign_key "chatrooms", "users", column: "passenger_id"
   add_foreign_key "drivers", "users"
-  add_foreign_key "messages", "bookings"
+  add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
-  add_foreign_key "reviews", "rides"
+  add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "users", column: "receiver_id"
   add_foreign_key "reviews", "users", column: "reviewer_id"
   add_foreign_key "ride_points", "rides"

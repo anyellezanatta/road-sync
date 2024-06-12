@@ -1,22 +1,14 @@
 require_relative "../services/tomtom_service"
 
 class RidesController < ApplicationController
+  before_action :authenticate_user!, only: %i[show]
+
   def show
     @ride = Ride.find(params[:id])
-
-    geocodedOrigin = geocodedAddresses(params[:origin])
-    geocodedDestination = geocodedAddresses(params[:destination])
-
-    @map_data = { ride: { origin: { city: @ride.origin.capitalize, latitude: @ride.origin_latitude, longitude: @ride.origin_longitude },
-                          destination: { city: @ride.destination.capitalize, latitude: @ride.destination_latitude,
-                                         longitude: @ride.destination_longitude } },
-                  user: { origin: { city: params[:origin].capitalize, latitude: geocodedOrigin.latitude, longitude: geocodedOrigin.longitude },
-                          destination: { city: params[:destination].capitalize, latitude: geocodedDestination.latitude,
-                                         longitude: geocodedDestination.longitude } } }.to_json
-
-    @booking = Booking.new
     @reviews = Review.where(receiver_id: @ride.driver.user_id)
+    @booking = Booking.new
     @chatroom = Chatroom.new
+    @map_data = get_map_data(params[:origin], params[:destination])
   end
 
   def index
@@ -64,5 +56,19 @@ class RidesController < ApplicationController
 
   def geocodedAddresses(address)
     Geocoder.search(address).first
+  end
+
+  def get_map_data(origin, destination)
+    geocodedOrigin = geocodedAddresses(origin)
+    geocodedDestination = geocodedAddresses(destination)
+
+    return {} if geocodedOrigin.nil? || geocodedDestination.nil?
+
+    return { ride: { origin: { city: @ride.origin.capitalize, latitude: @ride.origin_latitude, longitude: @ride.origin_longitude },
+                     destination: { city: @ride.destination.capitalize, latitude: @ride.destination_latitude,
+                                    longitude: @ride.destination_longitude } },
+             user: { origin: { city: params[:origin].capitalize, latitude: geocodedOrigin.latitude, longitude: geocodedOrigin.longitude },
+                     destination: { city: params[:destination].capitalize, latitude: geocodedDestination.latitude,
+                                    longitude: geocodedDestination.longitude } } }.to_json
   end
 end

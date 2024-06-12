@@ -10,7 +10,7 @@
   </div>
   <div class="container-ride-card">
     <% @rides.each do |ride|%>
-      <%= link_to ride_path(ride, origin: @origin, destination:@destination), class: "link-ride" do %>
+      <%= link_to ride_path(ride, origin: @origin, destination:@destination, date:@date, passengers:@passengers), class: "link-ride" do %>
         <div class="card-ride"">
           <div class="card-info">
             <div class="card-route">
