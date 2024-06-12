@@ -109,16 +109,16 @@ review8 = Review.create!(comment: "Matilda was polite and drove safely. The car 
 
 puts "Finished creating reviews!"
 
-puts "Creating messages..."
+# puts "Creating chatrooms..."
 
-message1 = Message.create!(content: "Hi Anyelle, I just wanted to confirm the booking for the ride from Arnhem to Schiphol. Looking forward to the trip!", booking: booking1, user: parikaya)
-message2 = Message.create!(content: "Hi Parikaya, thanks for confirming the booking! I'll see you at the pick-up point in Ede. Looking forward to the trip as well!", booking: booking1, user: anyelle)
-message3 = Message.create!(content: "Hi Anyelle, I just wanted to confirm the booking for the ride from Utrecht to Amsterdam. Looking forward to the trip!", booking: booking2, user: anyelle)
-message4 = Message.create!(content: "Hi Parikaya, thanks for confirming the booking! I'll see you at the pick-up point in Maarssen. Looking forward to the trip as well!", booking: booking2, user: parikaya)
-message5 = Message.create!(content: "Hi Marie, I just wanted to confirm the booking for the ride from Rotterdam to Delft. Looking forward to the trip!", booking: booking3, user: marie)
-message6 = Message.create!(content: "Hi Matilda, thanks for confirming the booking! I'll see you at the pick-up point in Rotterdam. Looking forward to the trip as well!", booking: booking3, user: anyelle)
-message7 = Message.create!(content: "Hi Anyelle, I just wanted to confirm the booking for the ride from Utrecht to Rotterdam. Looking forward to the trip!", booking: booking4, user: matilda)
-message8 = Message.create!(content: "Hi Marie, thanks for confirming the booking! I'll see you at the pick-up point in Utrecht. Looking forward to the trip as well!", booking: booking4, user: marie)
-message9 = Message.create!(content: "Hi Anyelle, I just wanted to confirm the booking for the ride from Rhenen to Utrecht. Looking forward to the trip!", booking: booking5, user: anyelle)
-message10 = Message.create!(content: "Hi Parikaya, thanks for confirming the booking! I'll see you at the pick-up point in Rhenen. Looking forward to the trip as well!", booking: booking5, user: parikaya)
-message11 = Message.create!(content: "Hi Matilda, I just wanted to confirm the booking for the ride from Amsterdam to Arnhem. Looking forward to the trip!", booking: booking6, user: matilda)
+# chatroom1 = Chatroom.create!(ride: ride1, driver: driverAnyelle, passenger: parikaya)
+
+
+
+# puts "Finished creating chatrooms!"
+
+# puts "Creating messages..."
+
+# Message.create!(user: parikaya, chatroom: chatroom1, content: "Hi Anyelle, Can I bring my dog along?")
+
+# puts "Finished creating messages!"
