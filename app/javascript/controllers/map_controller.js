@@ -8,6 +8,8 @@ export default class extends Controller {
     mapData: String,
     startMark: String,
     endMark: String,
+    personStartMark: String,
+    personEndMark: String,
   };
 
   connect() {
@@ -24,21 +26,19 @@ export default class extends Controller {
       zoom: 8,
     });
 
-    console.log(this.startMarkValue, "image");
-
     this.#drawRoute(map, data);
 
     this.#createMarker(
       [data.user.origin.longitude, data.user.origin.latitude],
-      new tt.Popup({ offset: 35 }).setHTML("User start point"),
+      this.#createPopup(`<p>${data.user.origin.city}</p>`, null, map),
       map,
-      this.startMarkValue
+      this.personStartMarkValue
     );
     this.#createMarker(
       [data.user.destination.longitude, data.user.destination.latitude],
-      new tt.Popup({ offset: 35 }).setHTML("User end point"),
+      this.#createPopup(`<p >${data.user.destination.city}</p>`, null, map),
       map,
-      this.endMarkValue
+      this.personEndMarkValue
     );
     if (
       data.ride.origin.longitude != data.user.destination.longitude &&
@@ -46,7 +46,7 @@ export default class extends Controller {
     ) {
       this.#createMarker(
         [data.ride.origin.longitude, data.ride.origin.latitude],
-        new tt.Popup({ offset: 35 }).setHTML("Ride start point"),
+        this.#createPopup(`<p>${data.ride.origin.city}</p>`, null, map),
         map,
         this.startMarkValue
       );
@@ -54,7 +54,7 @@ export default class extends Controller {
 
     this.#createMarker(
       [data.ride.destination.longitude, data.ride.destination.latitude],
-      new tt.Popup({ offset: 35 }).setHTML("Ride end point"),
+      this.#createPopup(`<p>${data.ride.destination.city}</p>`, null, map),
       map,
       this.endMarkValue
     );
@@ -68,10 +68,10 @@ export default class extends Controller {
       .calculateRoute({
         batchMode: "sync",
         key: this.keyValue,
-        // option: [{ computeTravelTimeFor: "all" }],
+        computeTravelTimeFor: "all",
         batchItems: [
           {
-            locations: `${data.ride.origin.longitude},${data.ride.origin.latitude}:${data.ride.destination.longitude},${data.ride.destination.latitude}`,
+            locations: `${data.ride.origin.longitude},${data.ride.origin.latitude}:${data.user.origin.longitude},${data.user.origin.latitude}:${data.user.destination.longitude},${data.user.destination.latitude}:${data.ride.destination.longitude},${data.ride.destination.latitude}`,
           },
           {
             locations: `${data.user.origin.longitude},${data.user.origin.latitude}:${data.user.destination.longitude},${data.user.destination.latitude}`,
@@ -93,7 +93,7 @@ export default class extends Controller {
               data: routeRide.toGeoJson(),
             },
             paint: {
-              "line-color": "gray",
+              "line-color": "#979da2",
               "line-width": 5,
             },
             layout: {
@@ -109,7 +109,7 @@ export default class extends Controller {
               data: routeUser.toGeoJson(),
             },
             paint: {
-              "line-color": "blue",
+              "line-color": "#1291A8",
               "line-width": 6,
             },
             layout: {
@@ -117,21 +117,11 @@ export default class extends Controller {
               "line-join": "round",
             },
           });
-        this.#createPopup(routeUser, map);
+        this.#createPopupTimeTravel(routeUser, map);
       });
   }
 
-  #createPopup(routeUser, map) {
-    const coordinates = routeUser.toGeoJson().features[0].geometry.coordinates;
-    const midIndex = Math.floor(coordinates.length / 2);
-    const userRouteSummary = routeUser.routes[0].summary;
-
-    const popupHTML = `<p class="map-popup" ><strong> ${this.#convertSecToHours(
-      userRouteSummary.travelTimeInSeconds
-    )}</strong>  ${this.#convertMetersToKm(
-      userRouteSummary.lengthInMeters
-    )}</p>`;
-
+  #createPopup(popupHTML, coordinates, map) {
     const markerHeight = 50,
       markerRadius = 10,
       linearOffset = 25;
@@ -157,15 +147,32 @@ export default class extends Controller {
       offset: popupOffsets,
       className: "map-popup",
       closeButton: false,
-    })
-      .setLngLat(coordinates[midIndex])
-      .setHTML(popupHTML)
-      .addTo(map);
+      closeOnClick: false,
+    });
+    if (coordinates) {
+      popup.setLngLat(coordinates);
+    }
+    popup.setHTML(popupHTML).addTo(map);
+    return popup;
+  }
+
+  #createPopupTimeTravel(routeUser, map) {
+    const coordinates = routeUser.toGeoJson().features[0].geometry.coordinates;
+    const midIndex = Math.floor(coordinates.length / 2);
+    const userRouteSummary = routeUser.routes[0].summary;
+
+    const popupHTML = `<p><strong> ${this.#convertSecToHours(
+      userRouteSummary.travelTimeInSeconds
+    )}</strong>  ${this.#convertMetersToKm(
+      userRouteSummary.lengthInMeters
+    )}</p>`;
+
+    this.#createPopup(popupHTML, coordinates[midIndex], map);
   }
 
   #createMarker(markerCoordinates, popup, map, icon) {
     const markerElement = document.createElement("div");
-    markerElement.innerHTML = `<img src='${icon}' style='width: 32px; height: 32px';>`;
+    markerElement.innerHTML = `<img src='${icon}' style='width: 32px; height: 45px';>`;
     return new tt.Marker({ element: markerElement })
       .setLngLat(markerCoordinates)
       .setPopup(popup)

@@ -7,11 +7,11 @@ class RidesController < ApplicationController
     geocodedOrigin = geocodedAddresses(params[:origin])
     geocodedDestination = geocodedAddresses(params[:destination])
 
-    @map_data = { ride: { origin: { latitude: @ride.origin_latitude, longitude: @ride.origin_longitude },
-                          destination: { latitude: @ride.destination_latitude,
+    @map_data = { ride: { origin: { city: @ride.origin.capitalize, latitude: @ride.origin_latitude, longitude: @ride.origin_longitude },
+                          destination: { city: @ride.destination.capitalize, latitude: @ride.destination_latitude,
                                          longitude: @ride.destination_longitude } },
-                  user: { origin: { latitude: geocodedOrigin.latitude, longitude: geocodedOrigin.longitude },
-                          destination: { latitude: geocodedDestination.latitude,
+                  user: { origin: { city: params[:origin].capitalize, latitude: geocodedOrigin.latitude, longitude: geocodedOrigin.longitude },
+                          destination: { city: params[:destination].capitalize, latitude: geocodedDestination.latitude,
                                          longitude: geocodedDestination.longitude } } }.to_json
 
     @booking = Booking.new
