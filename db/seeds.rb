@@ -109,14 +109,17 @@ review8 = Review.create!(comment: "Matilda was polite and drove safely. The car 
 
 puts "Finished creating reviews!"
 
-puts "Creating chatrooms..."
+# puts "Creating chatrooms..."
 
-chatroom1 = Chatroom.create!(ride: ride1, driver: driverAnyelle, passenger: parikaya)
+# chatroom1 = Chatroom.create!(ride: ride1, driver: driverAnyelle, passenger: parikaya)
 
 
 
-puts "Finished creating chatrooms!"
+# puts "Finished creating chatrooms!"
 
-puts "Creating messages..."
+# puts "Creating messages..."
 
-# message1 = Message.create!(user: parikaya, chatroom: chatroom1, content: "Hi Anyelle, Can I bring a medium
+# Message.create!(user: parikaya, chatroom: chatroom1, content: "Hi Anyelle, Can I bring my dog along?")
+
+# puts "Finished creating messages!"
+
