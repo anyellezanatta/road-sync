@@ -1,6 +1,6 @@
 class Ride < ApplicationRecord
   belongs_to :driver
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :bookings
 
   geocoded_by :origin, latitude: :origin_latitude, longitude: :origin_longitude

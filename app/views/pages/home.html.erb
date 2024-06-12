@@ -1,4 +1,4 @@
-<div class="container home-container">
+<div class="container home-container" id="search-form">
   <h1><strong>Find a ride to your destination</strong></h1>
   <p><strong>Enter your journey details, hop in & go!</strong></p>
   <%= render 'form' %>
@@ -25,4 +25,7 @@
     <h5>Getting in touch with new people</h5>
     <h5>Enhanced Safety with a shared ride </h5>
   </div>
+
+  <%= link_to "Find your perfect driver", '#search-form', class: "btn btn-primary mt-3" %>
+
 </div>

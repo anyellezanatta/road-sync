@@ -16,14 +16,32 @@
       </div>
     </div>
   </div>
-  <div class="driver-card">
-    <%= cl_image_tag @ride.driver.user.photo.key, crop: :fill, class:"avatar-bordered" %>
-    <div class="driver-info">
-      <h2><%= @ride.driver.user.first_name %></h2>
-      <p><%= @ride.driver.car_model %></p>
+
+
+
+  <%= link_to '#', class: "text-decoration-none text-darkblue" do %>
+    <div class="driver-card">
+      <%= cl_image_tag @ride.driver.user.photo.key, crop: :fill, class:"avatar-bordered" %>
+      <div class="driver-info">
+        <h2><%= @ride.driver.user.first_name %></h2>
+        <p><%= @ride.driver.car_model %></p>
+      </div>
+      <%= simple_form_for ([@ride, @chatroom]) do |f| %>
+        <%= f.hidden_field :driver_id, value: @ride.driver.user.id %>
+        <%= f.hidden_field :passenger_id, value: current_user.id %>
+        <%= f.hidden_field :ride_id, value: @ride.id %>
+        <%= f.submit style: "display:none;" %>
+        <button type="button" onclick="document.querySelector('form').submit();" class="button-with-svg">
+          <%= image_tag('chat.svg', alt: 'Chat with driver') %>
+        </button>
+      <% end %>
     </div>
-    <%= link_to image_tag("chat.svg", alt:"chat with driver"), root_path%>
-  </div>
+  <% end %>
+
+
+
+
+
   <%= simple_form_for ([@ride, @booking]), html: {class: "ride-book-card"} do |f| %>
     <div class="ride-book-input">
       <%= f.input :seats, input_html: {value: 1}%>
@@ -44,7 +62,7 @@
           </div>
           <div class="review-info">
             <h3><%= review.reviewer.first_name %></h3>
-            <p><%= review.comments %></p>
+            <p><%= review.comment %></p>
           </div>
         </div>
       <% end %>
