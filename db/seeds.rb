@@ -78,17 +78,7 @@ ride8 = Ride.create!(origin: "Delft", destination: "Rotterdam",  origin_address:
 puts "Creating bookings..."
 Booking.create(ride: ride1, user: marie, status: "confirmed", seats: 1, origin: "Ede", origin_address: "Arnhemseweg 2A, 6711 HA Ede", destination: "Utrecht", destination_address: "Lange Viestraat 3, 3511 BK Utrecht")
 Booking.create(ride: ride2, user: matilda, status: "confirmed", seats: 1, origin: "Utrecht", origin_address: "Castle De Haar, Kasteellaan 1, 3455 RR Utrecht", destination: "Amsterdam", destination_address: "IKEA Amsterdam, Hullenbergweg 2, 1101 BL Amsterdam")
-# booking1 = Booking.create!(ride: ride1, user: parikaya, seats: 2, status: "confirmed")
-# booking2 = Booking.create!(ride: ride2, user: marie, seats: 1, status: "pending")
-# Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
-# Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
-# Booking.create!(ride: ride4, user: marie, seats: 1, status: "confirmed")
-# Booking.create!(ride: ride2, user: marie, seats: 1, status: "confirmed")
-# Booking.create!(ride: ride1, user: marie, seats: 1, status: "confirmed")
-# Booking.create!(ride: ride5, user: marie, seats: 1, status: "confirmed")
-
-booking3 = Booking.create!(ride: ride3, user: matilda, seats: 3, status: "confirmed")
-booking4 = Booking.create!(ride: ride4, user: anyelle, seats: 1, status: "declined")
+Booking.create(ride: ride3, user: anyelle, status: "confirmed", seats: 1, origin: "Rotterdam", origin_address: "Rotterdam Airportplein 60, 3045 AP Rotterdam", destination: "Delft", destination_address: "Vesteplein 5, 2611 WG Delft")
 
 puts "Creating reviews..."
 review1 = Review.create!(comment: "Great driver!", rating: 5, booking: booking1, reviewer: parikaya, receiver: anyelle)
