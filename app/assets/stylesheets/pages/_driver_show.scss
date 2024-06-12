@@ -43,3 +43,14 @@
 .name {
   font-weight: 400;
 }
+
+.car-model-image {
+
+  img {
+    height: 250px;
+    width:365px;
+    // border: 2px solid $dark-blue;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+}

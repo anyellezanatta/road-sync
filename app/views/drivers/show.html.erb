@@ -8,22 +8,26 @@
       </div>
 
       <div class="details">
-        <p><%= image_tag 'mail.svg' %>  <%= @driver.user.email %></p>
-        <p><%= image_tag 'phone.svg' %> <%= @driver.user.phone_number %></p>
+        <p><%= image_tag 'mail.svg' %>  <span class='ms-3'><%= @driver.user.email %></span></p>
+        <p><%= image_tag 'phone.svg' %>  <span class='ms-3'><%= @driver.user.phone_number %></span></p>
         <p>
           <span style='color: #0A4B57'>
             <i class="fa-regular fa-id-card"></i>
           </span>
+          <span class='ms-3'>
           <%= @driver.dl_number %>
+          </span>
         </p>
-        <p><%= image_tag 'driverlicense.png', class: "icon-driver-img" %> <%= @driver.car_plate %></p>
+        <p><%= image_tag 'driverlicense.png', class: "icon-driver-img" %>  <span class='ms-3'><%= @driver.car_plate %></span></p>
         <p>
           <span style='color: #0A4B57'>
             <i class="fa-solid fa-car"></i>
           </span>
+          <span class='ms-3'>
           <%= @driver.car_model %>
+          </span>
         </p>
-        <p><strong>color : </strong><%= @driver.car_color %></p>
+        <p><strong>color :</strong><span class='ms-2'><%= @driver.car_color %></span></p>
       </div>
     </div>
 
