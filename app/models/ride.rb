@@ -17,11 +17,8 @@ class Ride < ApplicationRecord
   def calculate_routes
     tomtom_service = TomTomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
 
-    p origin_latitude
-    p destination_latitude
     response = tomtom_service.calculate_route("#{origin_latitude},#{origin_longitude}",
                                               "#{destination_latitude},#{destination_longitude}")
-    p response
     return unless response["routes"].present?
 
     points = response["routes"].first["legs"].first["points"]
@@ -30,7 +27,6 @@ class Ride < ApplicationRecord
   end
 
   def geocode_endpoints
-    p origin
     if origin_changed?
       geocoded = Geocoder.search(origin).first
       if geocoded
@@ -41,7 +37,6 @@ class Ride < ApplicationRecord
 
     return unless destination_changed?
 
-    p destination
     geocoded = Geocoder.search(destination).first
     return unless geocoded
 
