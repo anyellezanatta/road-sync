@@ -1,8 +1,9 @@
 .avatar-large {
   margin: 40px;
-  height: 60px;
-  width: 60px;
+  height: 85px;
+  width: 85px;
   border: 2px solid #0A4B57;
+  border-radius: 50%;
 }
 
 .details {
@@ -41,6 +42,7 @@
   padding-bottom: 5px;
   height: 20px;
   width: 20px;
+  margin-right: 5px;
 }
 
 
@@ -61,9 +63,42 @@
 
 .first-title {
   margin-left: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .no-recent-bookings {
   margin-right: 15px;
   font-weight: bold;
+}
+
+.car-image {
+
+  img {
+    height: 51px;
+    width: 75px;
+    border: 2px solid #0A4B57;
+    border-radius: 10px;
+  }
+
+}
+
+#pills-home-tab {
+  // background-color: #1291A8;
+}
+
+.nav-link {
+  background-color: white;
+  color: $light-blue;
+}
+
+.nav-link:hover {
+  color:#0A4B57;
+}
+
+
+.nav-pills .nav-link.active {
+  background-color: $light-blue;
+  color: white;
+  border-radius: 5px;
 }
