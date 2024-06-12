@@ -67,6 +67,10 @@ ride7 = Ride.create!(origin: "Arnhem", destination: "Utrecht",  origin_address: 
                     remarks: "No pets allowed", price_per_km: 0.8, seats: 2, driver: driverAnyelle)
 ride8 = Ride.create!(origin: "Delft", destination: "Rotterdam",  origin_address: "Kleveringweg 2, 2616 LZ Delft", destination_address: "Coolsingel 44, 3011 AD Rotterdam", date: Date.new(2024, 6, 17), start_time: "16:00",
                     remarks: "No pets allowed", price_per_km: 0.8, seats: 2, driver: driverMatilda)
+ride9 = Ride.create!(origin: "Arnhem", destination: "Schipol",  origin_address: "Fortunastraat 34, 6846XZ Arnhem", destination_address: "Aankomstpassage 1, 1118 AX Schiphol", date: Date.new(2024, 6, 17), start_time: "10:00",
+                    remarks: "No smoking allowed", price_per_km: 0.8, seats: 3, driver: driverMarie)
+ride10 = Ride.create!(origin: "Arnhem", destination: "Schipol",  origin_address: "Fortunastraat 34, 6846XZ Arnhem", destination_address: "Aankomstpassage 1, 1118 AX Schiphol", date: Date.new(2024, 6, 17), start_time: "7:00",
+                    remarks: "No smoking allowed", price_per_km: 0.6, seats: 3, driver: driverMatilda)
 
 
 puts "Finished creating rides!"
