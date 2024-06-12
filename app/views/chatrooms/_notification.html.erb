@@ -1,8 +1,12 @@
-<div class="notification">
-<%= cl_image_tag @chatroom.messages.last.user.photo.key, crop: :fill, class:"avatar-bordered" %>
-<div class="notification-content">
-    <strong><%= @message.user.first_name %></strong>
-    <small><i><%= @message.created_at.strftime("%a %b %e at %l:%M %p") %></i></small>
-    <small><p><%= @message.content %></p>
+
+  <%# Photo %>
+  <%= cl_image_tag chatroom.messages.last.user.photo.key, crop: :fill, class:"avatar-bordered" %>
+
+  <%# Content %>
+  <div class="notification-content align-self-center ms-3 d-flex">
+    <div>
+      <strong><%= chatroom.messages.last.user.first_name %></strong>
+      <small><p><%= chatroom.messages.last.content %></p>
+    </div>
+    <small class='message-time'><i><%= chatroom.messages.last.created_at.strftime("%l:%M %p") %></i></small>
   </div></small>
-</div>
