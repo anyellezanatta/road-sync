@@ -4,6 +4,7 @@ class RidesController < ApplicationController
     @booking = Booking.new
     # @users = User.all
     @reviews = Review.where(receiver_id: @ride.driver.user_id)
+    @chatroom = Chatroom.new
   end
 
   def index
