@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[create]
   end
 
+  resources :chatrooms, only: %i[index]
+  
   resources :drivers, only: [:show]
   resources :bookings, only: %i[show] do
     resources :reviews, only: [:new, :create]
