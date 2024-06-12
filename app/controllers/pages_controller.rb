@@ -9,4 +9,5 @@ class PagesController < ApplicationController
       @driver_bookings = current_user.driver_bookings
     end
   end
+
 end
