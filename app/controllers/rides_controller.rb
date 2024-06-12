@@ -12,33 +12,40 @@ class RidesController < ApplicationController
   end
 
   def index
-    tomtom_service = TomTomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
-
-    @rides = Ride.joins(:driver).where.not(driver: { user: current_user }).order(:start_time)
-    @destination = ""
-
     search = params[:search]
-    return unless params[:search].present?
-    return unless search[:origin].present? || search[:destination].present? || search[:date].present?
+    if !params[:search].present? || !search[:origin].present? || !search[:destination].present? || !search[:date].present?
+      return render "pages/home", status: :unprocessable_entity
+    end
 
     @origin = search[:origin].downcase
+
     @destination = search[:destination].downcase
     @date = Date.parse(search[:date])
-    passengers = search[:seats].to_i
+    @passengers = search[:seats].to_i
+
+    @rides = Ride.joins(:driver).where.not(driver: { user: current_user }).order(:start_time)
     sql_subquery = "DATE(date) = :date #{search[:seats].present? ? 'AND seats >= :passengers' : ''}"
+
     @rides = @rides.where(sql_subquery, date: @date,
-                                        passengers:).order(:start_time)
+                                        passengers: @passengers).order(:start_time)
 
-    geocodedOrigin = geocodedAddresses(@origin)
-    geocodedDestination = geocodedAddresses(@destination)
-
-    user_response = tomtom_service.calculate_route("#{geocodedOrigin.latitude},#{geocodedOrigin.longitude}",
-                                                   "#{geocodedDestination.latitude},#{geocodedDestination.longitude}")
-    user_points = user_response["routes"].first["legs"].first["points"]
+    user_points = calculate_route(@origin, @destination)
     @rides = find_matching_rides(user_points, @rides)
   end
 
   private
+
+  def calculate_route(origin, destination)
+    tomtom_service = TomTomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
+
+    geocodedOrigin = geocodedAddresses(origin)
+    geocodedDestination = geocodedAddresses(destination)
+
+    user_response = tomtom_service.calculate_route("#{geocodedOrigin.latitude},#{geocodedOrigin.longitude}",
+                                                   "#{geocodedDestination.latitude},#{geocodedDestination.longitude}")
+
+    return user_response["routes"].first["legs"].first["points"]
+  end
 
   def find_matching_rides(user_points, rides)
     rides.select do |ride|
