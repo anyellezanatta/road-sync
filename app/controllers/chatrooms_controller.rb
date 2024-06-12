@@ -10,9 +10,11 @@ class ChatroomsController < ApplicationController
   def create
     ride = Ride.find(params[:ride_id])
     @existing_chatroom = Chatroom.find_by(ride_id: params[:ride_id], driver: ride.driver, passenger: current_user)
+
     if @existing_chatroom.nil?
-      @chatroom = Chatroom.new(chatroom_params)
-      @chatroom.driver = ride.driver
+      @chatroom = Chatroom.new
+      @chatroom.ride = ride
+      @chatroom.driver = ride.driver.user
       @chatroom.passenger = current_user
       if @chatroom.save
         redirect_to ride_chatroom_path(ride, @chatroom, origin: params[:origin], destination: params[:destination],
