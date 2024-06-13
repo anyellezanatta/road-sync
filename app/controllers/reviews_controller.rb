@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
       @review.reviewer = current_user
       @review.receiver = @booking.ride.driver.user
       @review.save
-      redirect_to dashboard_path(@booking)
+      redirect_to dashboard_path
     end
 
     private
