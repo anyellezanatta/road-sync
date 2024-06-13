@@ -1,11 +1,13 @@
 <div class="container home-container" id="search-form">
   <h1><strong>Find a ride to your destination</strong></h1>
   <p><strong>Enter your journey details, hop in & go!</strong></p>
-  <%= render 'form' %>
+  <%= render 'pages/form' %>
 </div>
-  <%= image_tag "home.jpg", id: "home-img", alt: "Two people traveling together in a car" %>
+<%= image_tag "home.jpg", id: "home-img", alt: "Two people traveling together in a car" %>
 <div class="container home-container benefits">
-  <h2><em>"Wherever you go <br>-<br> Sync you flow!"</em></h2>
+  <h2><em>"Wherever you go <br>
+      -<br>
+       Sync you flow!"</em></h2>
   <h1><strong>Why RoadSync?</strong></h1>
   <div class="benefits-card">
     <h2><strong>Saving costs</strong></h2>
@@ -25,7 +27,5 @@
     <h5>Getting in touch with new people</h5>
     <h5>Enhanced Safety with a shared ride </h5>
   </div>
-
   <%= link_to "Find your perfect driver", '#search-form', class: "btn btn-primary mt-3" %>
-
 </div>

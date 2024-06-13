@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_10_105754) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_11_143541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_105754) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "seats"
+    t.string "origin"
+    t.string "origin_address"
+    t.string "destination"
+    t.string "destination_address"
+    t.float "origin_latitude"
+    t.float "origin_longitude"
+    t.float "destination_latitude"
+    t.float "destination_longitude"
     t.index ["ride_id"], name: "index_bookings_on_ride_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -98,6 +106,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_105754) do
     t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
   end
 
+  create_table "ride_points", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "ride_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ride_id"], name: "index_ride_points_on_ride_id"
+  end
+
   create_table "rides", force: :cascade do |t|
     t.bigint "driver_id", null: false
     t.integer "seats"
@@ -113,6 +130,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_105754) do
     t.float "origin_longitude"
     t.float "destination_latitude"
     t.float "destination_longitude"
+    t.string "origin_address"
+    t.string "destination_address"
     t.index ["driver_id"], name: "index_rides_on_driver_id"
   end
 
@@ -144,5 +163,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_105754) do
   add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "users", column: "receiver_id"
   add_foreign_key "reviews", "users", column: "reviewer_id"
+  add_foreign_key "ride_points", "rides"
   add_foreign_key "rides", "drivers"
 end
