@@ -17,10 +17,10 @@
   <%# Tabs %>
   <ul class="nav nav-pills mb-3 mx-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Upcoming</button>
+      <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Request</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Request</button>
+      <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Upcoming</button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">History</button>
@@ -30,14 +30,30 @@
 
 
   <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <%# Your request %>
+    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <% if @bookings.count > 0 %>
+        <% @bookings.each do |booking| %>
+          <% if booking.status != 'cancelled' && booking.status != 'declined' %>
+            <div class="card mx-3 py-3 px-3 d-flex mb-4">
+              <div>
+                <p><strong><%= booking.ride.driver.user.first_name %></strong></p>
+                <p><%= booking.ride.origin %> - <%= booking.ride.destination %></p>
+                <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
+              </div>
+              <div class="">
+                <%= link_to 'Cancel', cancel_booking_path(booking), class: 'btn btn-primary', data: { "turbo-method": :patch }  %>
+              </div>
+            </div>
+          <% else %>
+            <p class="else-statement px-3">No requests at the moment</p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
 
-      <%# Upcoming rides %>
-
-      <div class="recent">
-        <h1>Upcoming rides</h1>
-      </div>
-
+    <%# Upcoming rides %>
+    <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <%  upcoming_bookings = @bookings.select { |booking| booking.ride.date > Date.today && booking.status == 'confirmed'} %>
       <% if upcoming_bookings.count > 0 %>
         <% upcoming_bookings.each do |booking| %>
@@ -70,40 +86,15 @@
           </div>
         <% end %>
       <% else %>
-        <p>No upcoming rides at the moment</p>
+        <p class="else-statement px-3">No upcoming rides at the moment</p>
         <% end %>
       <% end %>
     </div>
 
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-      <%# Your request %>
-      <div class="first-title">
-        <h1>Your Request</h1>
-      </div>
 
-      <% @bookings.each do |booking| %>
-        <% if booking.status != 'cancelled' && booking.status != 'declined' %>
-
-          <div class="card mx-3 py-3 px-3 d-flex mb-4">
-            <div>
-              <p><strong><%= booking.ride.driver.user.first_name %></strong></p>
-              <p><%= booking.ride.origin %> - <%= booking.ride.destination %></p>
-              <p><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
-            </div>
-            <div class="">
-              <%= link_to 'Cancel', cancel_booking_path(booking), class: 'btn btn-primary', data: { "turbo-method": :patch }  %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
 
     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
       <%# Recent rides %>
-      <div class="recent">
-        <h1>Previous rides</h1>
-      </div>
-
       <%# Check if there are bookings before today %>
       <%  previous_bookings = @bookings.select { |booking| booking.ride.date < Date.today  && booking.status == 'confirmed'} %>
 
