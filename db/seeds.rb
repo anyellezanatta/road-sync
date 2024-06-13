@@ -5,6 +5,7 @@ require "open-uri"
 puts "Cleaning database..."
 Message.destroy_all
 Review.destroy_all
+RidePoint.destroy_all
 Chatroom.destroy_all
 Booking.destroy_all
 Ride.destroy_all
@@ -31,6 +32,7 @@ matilda.photo.attach(io: matildaAvatar, filename: 'matilda.png', content_type: '
 
 puts "Finished creating users!"
 puts "Creating drivers..."
+
 
 driverAnyelle = Driver.create!(user: anyelle, car_model: "Tesla Model 3", car_color: "black", car_plate: "1234ABC", dl_number: "1234567890")
 driverParikaya = Driver.create!(user: parikaya, car_model: "Tesla Model S", car_color: "white", car_plate: "5678DEF", dl_number: "0987654321")
