@@ -7,9 +7,9 @@
     </div>
 
     <div class="details">
-      <p><%= current_user.first_name %> <%= current_user.last_name %></p>
-      <p><%= current_user.email %></p>
-      <p><%= current_user.phone_number %></p>
+      <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
+      <p><%= image_tag 'mail.svg' %>   <%= current_user.email %></p>
+      <p><%= image_tag 'phone.svg' %>   <%= current_user.phone_number %></p>
     </div>
   </div>
 
