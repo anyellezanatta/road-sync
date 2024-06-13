@@ -1,7 +1,7 @@
 require_relative "../services/tomtom_service"
 class Ride < ApplicationRecord
   belongs_to :driver
-  has_many :reviews, dependent: :destroy
+  # has_many :reviews, dependent: :destroy
   has_many :bookings
   has_many :ride_points, dependent: :destroy
 
@@ -19,10 +19,9 @@ class Ride < ApplicationRecord
 
     response = tomtom_service.calculate_route("#{origin_latitude},#{origin_longitude}",
                                               "#{destination_latitude},#{destination_longitude}")
-    return unless response["routes"].present?
+    return p response["routes"] unless response["routes"].present?
 
     points = response["routes"].first["legs"].first["points"]
-
     points.each { |point| RidePoint.create(ride: self, latitude: point["latitude"], longitude: point["longitude"]) }
   end
 
