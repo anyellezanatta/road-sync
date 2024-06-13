@@ -1,7 +1,7 @@
 require_relative "../services/tomtom_service"
 class Ride < ApplicationRecord
   belongs_to :driver
-  has_many :reviews, dependent: :destroy
+  # has_many :reviews, dependent: :destroy
   has_many :bookings
   has_many :ride_points, dependent: :destroy
 
@@ -19,7 +19,12 @@ class Ride < ApplicationRecord
 
     response = tomtom_service.calculate_route("#{origin_latitude},#{origin_longitude}",
                                               "#{destination_latitude},#{destination_longitude}")
-    return unless response["routes"].present?
+     unless response["routes"].present?
+      p response
+p origin_address
+p destination_address
+      return
+     end
 
     points = response["routes"].first["legs"].first["points"]
 
@@ -28,7 +33,7 @@ class Ride < ApplicationRecord
 
   def geocode_endpoints
     if origin_changed?
-      geocoded = Geocoder.search(origin).first
+      geocoded = Geocoder.search(origin_address).first
       if geocoded
         self.origin_latitude = geocoded.latitude
         self.origin_longitude = geocoded.longitude
@@ -37,7 +42,8 @@ class Ride < ApplicationRecord
 
     return unless destination_changed?
 
-    geocoded = Geocoder.search(destination).first
+    geocoded = Geocoder.search(destination_address).first
+
     return unless geocoded
 
     self.destination_latitude = geocoded.latitude
