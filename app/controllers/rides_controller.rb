@@ -36,7 +36,7 @@ class RidesController < ApplicationController
   private
 
   def calculate_route(origin, destination)
-    tomtom_service = TomTomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
+    tomtom_service = TomtomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
 
     geocodedOrigin = geocodedAddresses(origin)
     geocodedDestination = geocodedAddresses(destination)

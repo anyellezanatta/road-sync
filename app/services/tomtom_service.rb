@@ -1,6 +1,6 @@
 require 'httparty'
 
-class TomTomService
+class TomtomService
   include HTTParty
   base_uri 'https://api.tomtom.com'
 
