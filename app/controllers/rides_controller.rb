@@ -30,7 +30,9 @@ class RidesController < ApplicationController
                                         passengers: @passengers).order(:start_time)
 
     user_points = calculate_route(@origin, @destination)
-    @rides = find_matching_rides(user_points, @rides)
+    if user_points.count != 0
+      @rides = find_matching_rides(user_points, @rides)
+    end
   end
 
   private
