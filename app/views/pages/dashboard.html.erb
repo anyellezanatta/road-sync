@@ -45,10 +45,10 @@
                 <%= link_to 'Cancel', cancel_booking_path(booking), class: 'btn btn-primary', data: { "turbo-method": :patch }  %>
               </div>
             </div>
-          <% else %>
-            <p class="else-statement px-3">No requests at the moment</p>
           <% end %>
         <% end %>
+      <% else %>
+        <p class="else-statement px-3">No requests at the moment</p>
       <% end %>
     </div>
 
@@ -93,8 +93,8 @@
 
 
 
+    <%# Recent rides %>
     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-      <%# Recent rides %>
       <%# Check if there are bookings before today %>
       <%  previous_bookings = @bookings.select { |booking| booking.ride.date < Date.today  && booking.status == 'confirmed'} %>
 
@@ -118,7 +118,7 @@
                   <p class="mb-1"><%= booking.ride.date.strftime("%d.%m") %> * <%= booking.ride.start_time.strftime("%I:%M %p") %></p>
                 </div>
                 <div class="">
-                  <%= link_to 'Rate', new_booking_review_path(booking), class: 'btn btn-primary'  %>
+                  <%= link_to 'Review', new_booking_review_path(booking), class: 'btn btn-primary px-2'  %>
                 </div>
               </div>
 
@@ -133,5 +133,5 @@
   </div>
 
   <div class="logout-button">
-    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-primary my-4" %>
+    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-primary" %>
   </div>
