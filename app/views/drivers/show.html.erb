@@ -54,7 +54,13 @@
             <%= cl_image_tag review.reviewer.photo.key, crop: :fill, class:"avatar-bordered review-avatar" %>
           </div>
           <div class="review-info">
-            <h3><%= review.reviewer.first_name %></h3>
+            <div class= "review-name-info">
+              <h3><%= review.reviewer.first_name %></h3>
+              <div class="rating-card">
+                <%= image_tag 'star-icon.svg',class:"icon-star-img"%>
+                <p><%= review.rating %>/5</p>
+              </div>
+            </div>
             <p><%= review.comment %></p>
           </div>
         </div>
