@@ -15,7 +15,7 @@ class Ride < ApplicationRecord
   private
 
   def calculate_routes
-    tomtom_service = TomTomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
+    tomtom_service = TomtomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
 
     response = tomtom_service.calculate_route("#{origin_latitude},#{origin_longitude}",
                                               "#{destination_latitude},#{destination_longitude}")
