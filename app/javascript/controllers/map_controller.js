@@ -82,7 +82,6 @@ export default class extends Controller {
         const routeRide = results.batchItems[0];
         const routeUser = results.batchItems[1];
 
-        console.log(map);
         map
           .addLayer({
             id: "ride_background",
