@@ -225,3 +225,21 @@
 .icon-dark{
   color: $dark-blue;
 }
+
+.review-name-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rating-card{
+
+  display: flex;
+  align-items: center;
+  p{
+    margin:0px
+  }
+  .icon-star-img{
+    width: 25px;
+  }
+
+}
