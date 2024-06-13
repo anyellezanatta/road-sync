@@ -43,8 +43,9 @@ class RidesController < ApplicationController
 
     user_response = tomtom_service.calculate_route("#{geocodedOrigin.latitude},#{geocodedOrigin.longitude}",
                                                    "#{geocodedDestination.latitude},#{geocodedDestination.longitude}")
+    return user_response["routes"].first["legs"].first["points"] if response["routes"].present?
 
-    return user_response["routes"].first["legs"].first["points"]
+    return []
   end
 
   def find_matching_rides(user_points, rides)
