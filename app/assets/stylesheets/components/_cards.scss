@@ -115,14 +115,15 @@
     p {
       color: #0A4B57;
     }
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
   }
   .river-details-info{
     flex-grow: 1;
   }
   .back-button{
-    align-self: flex-end;
+    margin-top: 20px;
+    margin-left: 20px;
 
   }
 }
@@ -169,26 +170,19 @@
   background-color:$light-gray;
   display: flex;
   gap: 10px;
-  h3, p{
-    margin: 0;
-  }
+  // h3, p{
+  //   margin: 0;
+  // }
   .review-info{
     align-content: center;
   }
   .review-avatar{
-    width: 30px;
+    width: 50px;
   }
 }
 
 .Euro-sign-icon {
   justify-content: space-between;
-}
-
-.fa-solid {
-  margin-right: 6px;
-  flex-direction: column;
-  color: $light-blue;
-
 }
 
 .card-route {
@@ -205,14 +199,29 @@
 
 .Price-per-Hour {
   color: $medium-blue;
+  .i {
+    margin-right: 6px;
+    flex-direction: column;
+    color: $light-blue;
+
+  }
 }
 
 .start-time {
   color: $medium-blue;
+  i  {
+    margin-right: 6px;
+    flex-direction: column;
+    color: $light-blue;
+  }
 }
 
-.fa-regular {
-  margin-right: 6px;
-  flex-direction: column;
-  color: $light-blue;
+.name-photo-card{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.icon-dark{
+  color: $dark-blue;
 }

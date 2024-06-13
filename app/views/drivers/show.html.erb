@@ -1,10 +1,13 @@
 <div class="container" id="driver-profile">
   <div class="driver-card">
-    <div class="name-photo-card mx-4 mt-3 d-flex justify-content-between">
-      <%= cl_image_tag @driver.user.photo.key, class: "driver-avatar" %>
+    <div class="back-button">
+      <%= link_to image_tag("arrow-left.svg", alt:"back"), ride_path(id: params[:ride_id], origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers])%>
+    </div>
+    <div class="name-photo-card">
       <div class="name align-self-center">
         <h2><%= @driver.user.first_name %> <%= @driver.user.last_name %></h2>
       </div>
+      <%= cl_image_tag @driver.user.photo.key, class: "driver-avatar" %>
     </div>
     <div class="driver-details">
       <div class="driver-details-info">
@@ -27,10 +30,7 @@
             <%= @driver.car_model %>
           </span>
         </p>
-        <p><strong>color :</strong><span class='ms-2'><%= @driver.car_color %></span></p>
-      </div>
-      <div class="back-button">
-        <%= link_to image_tag("arrow-left.svg", alt:"back"), ride_path(id: params[:ride_id], origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers])%>
+        <p><%= image_tag 'color-icon.svg', class: "icon-color" %><span class='ms-2'><%= @driver.car_color %></span></p>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
       <h1 class="mb-0">Reviews</h1>
     </div>
     <div>
-      <%= image_tag("driverprofile2.svg", alt:"car", class: "title-img")%>
+      <%= image_tag("driverprofile2.svg", alt:"car", class: "icon-dark")%>
     </div>
   </div>
   <div class="reviews-list d-flex">
@@ -55,7 +55,7 @@
           </div>
           <div class="review-info">
             <h3><%= review.reviewer.first_name %></h3>
-            <p><%= review.comments %></p>
+            <p><%= review.comment %></p>
           </div>
         </div>
       <% end %>

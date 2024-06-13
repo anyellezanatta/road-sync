@@ -36,22 +36,4 @@
       <%= f.button :submit, "Book" %>
     </div>
   <% end %>
-  <div class="reviews-list">
-    <h2>Driver Reviews</h2>
-    <% if @reviews.nil? %>
-      <p>No reviews yet</p>
-    <% else %>
-      <% @reviews.each do |review| %>
-        <div class="review-card">
-          <div>
-            <%= cl_image_tag review.reviewer.photo.key, crop: :fill, class:"avatar-bordered review-avatar" %>
-          </div>
-          <div class="review-info">
-            <h3><%= review.reviewer.first_name %></h3>
-            <p><%= review.comment %></p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
 </div>
