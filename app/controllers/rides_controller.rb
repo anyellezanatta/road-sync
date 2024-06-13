@@ -59,7 +59,6 @@ class RidesController < ApplicationController
 
   def routes_match?(user_points, driver_points)
     matching_points = user_points & driver_points
-    raise
     matching_percentage = (matching_points.size.to_f / user_points.size) * 100
 
     matching_percentage >= 50
