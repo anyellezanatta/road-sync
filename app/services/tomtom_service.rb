@@ -12,7 +12,8 @@ class TomtomService
     options = {
       query: {
         apiVersion: 2,
-        key: @api_key
+        key: @api_key,
+        traffic: "historical"
       }
     }
     self.class.get("/maps/orbis/routing/calculateRoute/#{start_point}:#{end_point}/json", options)

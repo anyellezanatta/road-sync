@@ -68,6 +68,7 @@ export default class extends Controller {
         batchMode: "sync",
         key: this.keyValue,
         computeTravelTimeFor: "all",
+        traffic: false,
         batchItems: [
           {
             locations: `${data.ride.origin.longitude},${data.ride.origin.latitude}:${data.user.origin.longitude},${data.user.origin.latitude}:${data.user.destination.longitude},${data.user.destination.latitude}:${data.ride.destination.longitude},${data.ride.destination.latitude}`,

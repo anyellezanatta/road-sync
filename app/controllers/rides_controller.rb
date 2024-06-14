@@ -30,9 +30,9 @@ class RidesController < ApplicationController
                                         passengers: @passengers).order(:start_time)
 
     user_points = calculate_route(@origin, @destination)
-    if user_points.count != 0
-      @rides = find_matching_rides(user_points, @rides)
-    end
+    return unless user_points.count != 0
+
+    @rides = find_matching_rides(user_points, @rides)
   end
 
   private
@@ -61,7 +61,7 @@ class RidesController < ApplicationController
     matching_points = user_points & driver_points
     matching_percentage = (matching_points.size.to_f / user_points.size) * 100
 
-    matching_percentage >= 50
+    matching_percentage >= 20
   end
 
   def geocodedAddresses(address)
