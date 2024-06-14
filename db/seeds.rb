@@ -26,7 +26,8 @@ parikayaAvatar = URI.open("https://avatars.githubusercontent.com/u/166150062?s=4
 parikaya.photo.attach(io: parikayaAvatar, filename: 'parikaya.png', content_type: 'image/png')
 
 marie = User.create!(email: "marie@email.com", password: "password", first_name: "Marie", last_name: "Auer",
-  
+  phone_number: Faker::PhoneNumber.phone_number_with_country_code)
+
 anyelleAvatar = URI.open("https://avatars.githubusercontent.com/u/11357820?s=400&u=1666b329c10d66870bbe0d27601151ee557c8a9e&v=4")
 marie.photo.attach(io: anyelleAvatar, filename: 'marie.png', content_type: 'image/png')
 
