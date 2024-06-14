@@ -16,8 +16,9 @@ puts "Creating users..."
 
 anyelle = User.create!(email: "anyelle@email.com", password: "password", first_name: "Anyelle", last_name: "Zanatta",
                        phone_number: Faker::PhoneNumber.phone_number_with_country_code)
-anyelleAvatar = URI.open("https://avatars.githubusercontent.com/u/11357820?s=400&u=1666b329c10d66870bbe0d27601151ee557c8a9e&v=4")
-anyelle.photo.attach(io: anyelleAvatar, filename: 'anyelle.png', content_type: 'image/png')
+
+marieAvatar = URI.open("https://avatars.githubusercontent.com/u/167030565?s=400&u=ac460e66b84b3adfc047d64714cde1fbcf7463f4&v=4")
+anyelle.photo.attach(io: marieAvatar, filename: 'anyelle.png', content_type: 'image/png')
 
 parikaya = User.create!(email: "parikaya@email.com", password: "password", first_name: "Parikaya", last_name: "Nanda",
                         phone_number: Faker::PhoneNumber.phone_number_with_country_code)
@@ -25,9 +26,9 @@ parikayaAvatar = URI.open("https://avatars.githubusercontent.com/u/166150062?s=4
 parikaya.photo.attach(io: parikayaAvatar, filename: 'parikaya.png', content_type: 'image/png')
 
 marie = User.create!(email: "marie@email.com", password: "password", first_name: "Marie", last_name: "Auer",
-                     phone_number: Faker::PhoneNumber.phone_number_with_country_code)
-marieAvatar = URI.open("https://avatars.githubusercontent.com/u/167030565?s=400&u=ac460e66b84b3adfc047d64714cde1fbcf7463f4&v=4")
-marie.photo.attach(io: marieAvatar, filename: 'marie.png', content_type: 'image/png')
+  
+anyelleAvatar = URI.open("https://avatars.githubusercontent.com/u/11357820?s=400&u=1666b329c10d66870bbe0d27601151ee557c8a9e&v=4")
+marie.photo.attach(io: anyelleAvatar, filename: 'marie.png', content_type: 'image/png')
 
 matilda = User.create!(email: "matilda@email.com", password: "password", first_name: "Matilda",
                        last_name: "Fritzmeier", phone_number: Faker::PhoneNumber.phone_number_with_country_code)
@@ -78,6 +79,7 @@ ride12 = Ride.create!(origin: "Tilberg", destination: "Den Helder",
                       origin_address: "Jan Heijnsstraat 10, 5041 GB Tilburg", destination_address: "Cornelis Gerritsz Geusstraat 59, 1785 EA Den Helder", date: Date.new(2024, 6, 17), start_time: "14:00", remarks: "No loud music allowed", price_per_km: 0.6, seats: 3, driver: driverAnyelle)
 ride13 = Ride.create!(origin: "Eindhoven", destination: "Zaandaam",
                       origin_address: "Aalsterweg 322, 5644 RL Eindhoven", destination_address: "Ebbehout 22, 1507 EA Zaandam", date: Date.new(2024, 6, 19), start_time: "06:00", remarks: "No loud music allowed", price_per_km: 0.8, seats: 3, driver: driverMarie)
+
 ride14 = Ride.create!(origin: "Eindhoven", destination: "Zaandaam",
                       origin_address: "Aalsterweg 322, 5644 RL Eindhoven", destination_address: "Ebbehout 22, 1507 EA Zaandam", date: Date.new(2024, 6, 16), start_time: "06:00", remarks: "No loud music allowed", price_per_km: 0.8, seats: 3, driver: driverMarie)
 ride15 = Ride.create!(origin: "Eindhoven", destination: "Zaandaam",
