@@ -1,18 +1,22 @@
-<div class="container show-container">
-  <%# <div class="title"> %>
-  <%# <h2>Your selected ride:</h2> %>
-  <%# </div> %>
-  <%= render "map", map_data: @map_data%>
+<div class="container show-container" data-controller="map" data-map-key-value="<%= ENV['TOMTOM_API_KEY']%>"
+   data-map-map-data-value="<%=@map_data%>" data-map-start-mark-value="<%= asset_path('start-marker.png') %>"
+   data-map-end-mark-value="<%= asset_path('end-marker.svg') %>"  data-map-person-start-mark-value="<%= asset_path('person-start-marker.png') %>"
+    data-map-person-end-mark-value="<%= asset_path('person-end-marker.png') %>">
+  <%= render "map"%>
   <div class="line-ride-card">
     <%= image_tag("line.svg", alt: "journey") %>
     <div class="show-info">
-      <div class="line-ride-card-route origin">
-        <h1><%= @ride.origin %></h1>
-        <p><%= @ride.start_time.strftime('%H:%M') %></p>
+      <div class="line-ride-card-route" id="origin">
+        <h1><%= params[:origin].capitalize %></h1>
+        <div class="date-time-container">
+          <%= image_tag("calendar.svg", alt: "calendar") %>
+          <p><%= @ride.date.strftime('%d %b %Y') %></p>
+          <p><%= @ride.start_time.strftime('%H:%M') %></p>
+        </div>
       </div>
-      <div class="line-ride-card-route destination">
-        <h1><%= @ride.destination %></h1>
-        <p><%= @ride.price_per_km %> €/km</p>
+      <div class="line-ride-card-route" id="destination">
+        <h1><%= params[:destination].capitalize %></h1>
+        <p><span data-map-target="total"> <%= @ride.price_per_km %></span> €</p>
       </div>
     </div>
   </div>
@@ -24,8 +28,14 @@
       <% end %>
       <p><%= @ride.driver.car_model %></p>
     </div>
-    <%= link_to ride_chatrooms_path(@ride, chatroom_id: @chatroom.id, origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers]), data: { "turbo-method": :post }  do %>
-      <%= image_tag('chat.svg', alt: 'Chat with driver') %>
+    <% if @chatroom.nil? %>
+      <%= link_to ride_chatrooms_path(@ride,origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers] ), data: { "turbo-method": :post } do %>
+        <%= image_tag('chat.svg', alt: 'Chat with driver') %>
+      <% end %>
+    <% else %>
+      <%= link_to ride_chatroom_path(@ride, @chatroom, origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers]) do %>
+        <%= image_tag('chat.svg', alt: 'Chat with driver') %>
+      <% end %>
     <% end %>
   </div>
   <%= simple_form_for ([@ride, @booking]), html: {class: "ride-book-card"} do |f| %>

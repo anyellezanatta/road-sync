@@ -83,7 +83,7 @@
   .line-ride-card-route{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+
 
     h1 {
       flex-grow: 1;
@@ -93,7 +93,20 @@
     p {
       margin: 0;
     }
+
+
   }
+  .date-time-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end
+  }
+}
+#origin {
+  align-items: flex-start;
+}
+#destination {
+  align-items: flex-end;
 }
 
 .driver-card {
