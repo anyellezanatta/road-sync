@@ -8,6 +8,7 @@ class ChatroomsController < ApplicationController
   end
 
   def create
+    raise
     ride = Ride.find(params[:ride_id])
     @existing_chatroom = Chatroom.find_by(ride_id: params[:ride_id], driver: ride.driver, passenger: current_user)
 

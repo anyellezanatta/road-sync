@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["map"];
+  static targets = ["map", "total"];
   static values = {
     key: String,
     mapData: String,
@@ -82,6 +82,7 @@ export default class extends Controller {
         console.log(results);
         const routeRide = results.batchItems[0];
         const routeUser = results.batchItems[1];
+        this.#calcutePrice(routeRide, data.ride.price_per_km);
 
         map
           .addLayer({
@@ -164,7 +165,7 @@ export default class extends Controller {
       userRouteSummary.travelTimeInSeconds
     )}</strong>  ${this.#convertMetersToKm(
       userRouteSummary.lengthInMeters
-    )}</p>`;
+    )} km</p>`;
 
     this.#createPopup(popupHTML, coordinates[midIndex], map);
   }
@@ -178,6 +179,12 @@ export default class extends Controller {
       .addTo(map);
   }
 
+  #calcutePrice(routeUser, price_per_km) {
+    const userRouteSummary = routeUser.routes[0].summary;
+    const distance = this.#convertMetersToKm(userRouteSummary.lengthInMeters);
+    this.totalTarget.innerHTML = distance * price_per_km;
+  }
+
   #convertSecToHours(totalSeconds) {
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
@@ -189,6 +196,6 @@ export default class extends Controller {
   }
 
   #convertMetersToKm(totalMeters) {
-    return (totalMeters / 1000).toFixed(1) + " km";
+    return (totalMeters / 1000).toFixed(1);
   }
 }

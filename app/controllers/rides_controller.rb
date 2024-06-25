@@ -6,8 +6,9 @@ class RidesController < ApplicationController
   def show
     @ride = Ride.find(params[:id])
     @reviews = Review.where(receiver_id: @ride.driver.user_id)
+    @chatroom = Chatroom.find_by(ride: @ride, driver: @ride.driver.user, passenger: current_user)
+    @chatroom = Chatroom.new if @chatroom.nil?
     @booking = Booking.new
-    @chatroom = Chatroom.new
     @map_data = get_map_data(params[:origin], params[:destination])
   end
 
@@ -40,14 +41,11 @@ class RidesController < ApplicationController
   def calculate_route(origin, destination)
     tomtom_service = TomtomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
 
-    geocodedOrigin = geocodedAddresses(origin)
-    geocodedDestination = geocodedAddresses(destination)
+    geocodedOrigin = tomtom_service.geocode_endpoints(origin)
+    geocodedDestination = tomtom_service.geocode_endpoints(destination)
 
-    user_response = tomtom_service.calculate_route("#{geocodedOrigin.latitude},#{geocodedOrigin.longitude}",
-                                                   "#{geocodedDestination.latitude},#{geocodedDestination.longitude}")
-    return user_response["routes"].first["legs"].first["points"] if user_response["routes"].present?
-
-    return []
+    tomtom_service.calculate_route("#{geocodedOrigin['lat']},#{geocodedOrigin['lon']}",
+                                   "#{geocodedDestination['lat']},#{geocodedDestination['lon']}")
   end
 
   def find_matching_rides(user_points, rides)
@@ -64,21 +62,19 @@ class RidesController < ApplicationController
     matching_percentage >= 20
   end
 
-  def geocodedAddresses(address)
-    Geocoder.search(address).first
-  end
-
   def get_map_data(origin, destination)
-    geocodedOrigin = geocodedAddresses(origin)
-    geocodedDestination = geocodedAddresses(destination)
+    tomtom_service = TomtomService.new(ENV.fetch("TOMTOM_API_KEY", nil))
+
+    geocodedOrigin = tomtom_service.geocode_endpoints(origin)
+    geocodedDestination = tomtom_service.geocode_endpoints(destination)
 
     return {} if geocodedOrigin.nil? || geocodedDestination.nil?
 
     return { ride: { origin: { city: @ride.origin.capitalize, latitude: @ride.origin_latitude, longitude: @ride.origin_longitude },
                      destination: { city: @ride.destination.capitalize, latitude: @ride.destination_latitude,
-                                    longitude: @ride.destination_longitude } },
-             user: { origin: { city: params[:origin].capitalize, latitude: geocodedOrigin.latitude, longitude: geocodedOrigin.longitude },
-                     destination: { city: params[:destination].capitalize, latitude: geocodedDestination.latitude,
-                                    longitude: geocodedDestination.longitude } } }.to_json
+                                    longitude: @ride.destination_longitude }, price_per_km: @ride.price_per_km },
+             user: { origin: { city: params[:origin].capitalize, latitude: geocodedOrigin["lat"], longitude: geocodedOrigin["lon"] },
+                     destination: { city: params[:destination].capitalize, latitude: geocodedDestination["lat"],
+                                    longitude: geocodedDestination["lon"] } } }.to_json
   end
 end
