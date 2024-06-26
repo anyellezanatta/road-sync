@@ -1,0 +1,35 @@
+<div class="chat-content">
+  <div class="messages" data-chatroom-subscription-target="messages">
+    <% if messages.size > 0 %>
+      <% chatroom.messages.each do |message| %>
+        <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+          <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+            <%= render "messages/message", message: message %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Feel free to ask your query</p>
+    <% end %>
+  </div>
+  <div class="chat-form">
+    <%= simple_form_for [ride, chatroom, message],
+      html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
+      %>
+    <% if current_user != chatroom.driver %>
+      <%= f.input :content,
+            label: false,
+            placeholder: "Message #{chatroom.driver.first_name}",
+            wrapper_html: { class: "flex-grow-1" }
+          %>
+      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+    <% else %>
+      <%= f.input :content,
+            label: false,
+            placeholder: "Message #{chatroom.passenger.first_name}",
+            wrapper_html: { class: "flex-grow-1" }
+          %>
+      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+    <% end %>
+  <% end %>
+</div>

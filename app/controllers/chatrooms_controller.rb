@@ -1,6 +1,9 @@
 class ChatroomsController < ApplicationController
   def index
-    @chatrooms = Chatroom.where(driver: current_user).or(Chatroom.where(passenger: current_user))
+    chatrooms = Chatroom.where(driver: current_user).or(Chatroom.where(passenger: current_user))
+    @chats = chatrooms.map do |chat|
+      { chatroom: chat, ride: chat.ride, buddy: chat.driver == current_user ? chat.passenger : chat.driver }
+    end
   end
 
   def new
@@ -8,7 +11,6 @@ class ChatroomsController < ApplicationController
   end
 
   def create
-    raise
     ride = Ride.find(params[:ride_id])
     @existing_chatroom = Chatroom.find_by(ride_id: params[:ride_id], driver: ride.driver, passenger: current_user)
 
