@@ -1,18 +1,24 @@
 <div class="container chatrooms-index">
-<h1 class="header-chats">Chats : </h1>
-  <div id="chatrooms-list">
-    <% @chatrooms.each do |chatroom| %>
-      <% if chatroom.messages.count != 0 %>
-        <div class="card">
-          <div class="chatroom-content">
-            <div class="notification d-flex">
-              <%= render "notification", chatroom: chatroom %>
+  <h1 class="header-chats">Chats : </h1>
+  <div class="chatrooms-list">
+    <% @chats.each do |chat| %>
+      <% if chat[:chatroom].messages.count != 0 %>
+        <%= link_to ride_chatroom_path(chat[:ride], chat[:chatroom], from: "chat") do %>
+          <div class="card-chatroom">
+            <div>
+              <%= cl_image_tag chat[:buddy].photo.key, crop: :fill, class:"avatar-bordered" %>
+            </div>
+            <div class="chatroom-details">
+              <div class="chatroom-header">
+                <h5><%= chat[:buddy].first_name %></h5>
+                <small><%= chat[:chatroom].messages.last.created_at.strftime("%d %b %Y %l:%M %p") %></small>
+              </div>
+              <div class="chatroom-message">
+                <p><%= chat[:chatroom].messages.last.content %></p>
+              </div>
             </div>
           </div>
-          <%# <div class="chatroom-actions">
-            <%= link_to "Join", ride_chatroom_path(chatroom.ride_id, chatroom), class: "btn btn-primary" %>
-          <%# </div> %>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>

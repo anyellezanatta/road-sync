@@ -2,7 +2,11 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
   data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
-  <%= link_to image_tag("arrow-left.svg", alt:"back"), ride_path(id: params[:ride_id], origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers]) %>
+  <% if params[:from].present? && params[:from] == "chat" %>
+    <%= link_to image_tag("arrow-left.svg", alt:"back"), chatrooms_path %>
+  <% else %>
+    <%= link_to image_tag("arrow-left.svg", alt:"back"), ride_path(id: params[:ride_id], origin: params[:origin], destination:params[:destination], date:params[:date], passengers:params[:passengers]) %>
+  <% end %>
   <div class="chat-content">
     <div class="messages" data-chatroom-subscription-target="messages">
       <% if @messages.size > 0 %>
@@ -23,17 +27,17 @@
       %>
       <% if current_user != @chatroom.driver %>
         <%= f.input :content,
-            label: false,
-            placeholder: "Message #{@chatroom.driver.first_name}",
-            wrapper_html: { class: "flex-grow-1" }
-          %>
+              label: false,
+              placeholder: "Message #{@chatroom.driver.first_name}",
+              wrapper_html: { class: "flex-grow-1" }
+            %>
         <%= f.submit "Send", class: "btn btn-primary mb-3" %>
       <% else %>
         <%= f.input :content,
-            label: false,
-            placeholder: "Message #{@chatroom.passenger.first_name}",
-            wrapper_html: { class: "flex-grow-1" }
-          %>
+              label: false,
+              placeholder: "Message #{@chatroom.passenger.first_name}",
+              wrapper_html: { class: "flex-grow-1" }
+            %>
         <%= f.submit "Send", class: "btn btn-primary mb-3" %>
       <% end %>
     <% end %>
